@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Home, Play, RotateCw, Trophy, Activity, Settings } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Home, Play, RotateCw, Trophy, Activity, Settings, ArrowLeft } from 'lucide-react';
+import { useGameCompletion } from '../../../../hooks/useGameCompletion';
+import GameCompletionModal from '../../../../components/GameCompletionModal/GameCompletionModal';
 import './SimpleHarmonicMotionLab.css';
 
 /**
@@ -8,13 +11,36 @@ import './SimpleHarmonicMotionLab.css';
  * Physics: x = A*cos(ωt + φ), v = -Aω*sin(ωt + φ), a = -Aω²*cos(ωt + φ)
  */
 
+const GAME_ID = 'lop11-c1-1';
+const GRADE = 11;
+const CHAPTER = 1;
+const GAME_TITLE = 'Simple Harmonic Motion Lab';
+
 const SimpleHarmonicMotionLab = () => {
+  const navigate = useNavigate();
   const canvasRef = useRef(null);
   const graphRef = useRef(null);
   const animationRef = useRef(null);
 
+  // Game completion hook
+  const {
+    isCompleted: alreadyCompleted,
+    gameResult: previousResult,
+    showCompletionModal,
+    handleComplete,
+    goToJourney,
+    playAgain,
+    closeCompletionModal,
+    resetTimer
+  } = useGameCompletion({
+    gameId: GAME_ID,
+    grade: GRADE,
+    chapter: CHAPTER
+  });
+
   const [gameState, setGameState] = useState('menu'); // menu, playing, paused, result
   const [mode, setMode] = useState('spring'); // spring, pendulum
+  const [completionResult, setCompletionResult] = useState(null);
   
   // Spring parameters
   const [mass, setMass] = useState(0.5); // kg
@@ -418,7 +444,7 @@ const SimpleHarmonicMotionLab = () => {
   };
 
   // Check prediction
-  const checkPrediction = () => {
+  const checkPrediction = async () => {
     if (!targetValues) return;
     
     const periodError = Math.abs(parseFloat(userPrediction.period) - targetValues.period) / targetValues.period;
@@ -428,6 +454,9 @@ const SimpleHarmonicMotionLab = () => {
     const avgError = (periodError + frequencyError + velocityError) / 3;
     const isPerfect = avgError < 0.05;
     
+    // Calculate score (0-100)
+    const score = Math.max(0, Math.round((1 - avgError) * 100));
+    
     setStats(prev => ({
       experimentsRun: prev.experimentsRun + 1,
       perfectPredictions: prev.perfectPredictions + (isPerfect ? 1 : 0),
@@ -435,6 +464,22 @@ const SimpleHarmonicMotionLab = () => {
     }));
     
     setShowResult(true);
+
+    // Complete game if score >= 50
+    if (score >= 50) {
+      const result = await handleComplete({
+        score,
+        maxScore: 100,
+        details: {
+          mode,
+          periodError: periodError * 100,
+          frequencyError: frequencyError * 100,
+          velocityError: velocityError * 100,
+          isPerfect
+        }
+      });
+      setCompletionResult(result);
+    }
   };
 
   // Return to menu
@@ -444,16 +489,51 @@ const SimpleHarmonicMotionLab = () => {
     resetSimulation();
   };
 
+  // Return to game journey
+  const goBack = () => {
+    navigate('/game-journey');
+  };
+
+  // Handle play again from modal
+  const handlePlayAgain = () => {
+    playAgain();
+    setCompletionResult(null);
+    resetSimulation();
+    resetTimer();
+  };
+
   return (
     <div className="shm-lab-container">
+      {/* Completion Modal */}
+      <GameCompletionModal
+        isOpen={showCompletionModal}
+        onClose={closeCompletionModal}
+        onPlayAgain={handlePlayAgain}
+        onGoToJourney={goToJourney}
+        result={completionResult || previousResult}
+        gameTitle={GAME_TITLE}
+      />
+
       {/* Menu */}
       {gameState === 'menu' && (
         <div className="shm-menu">
           <div className="shm-menu-content">
+            <button className="shm-back-btn" onClick={goBack}>
+              <ArrowLeft size={20} />
+              Quay lại
+            </button>
+            
             <div className="shm-title">
               <Activity className="shm-title-icon" />
               <h1>Simple Harmonic Motion Lab</h1>
             </div>
+            
+            {alreadyCompleted && (
+              <div className="shm-completed-badge">
+                <Trophy size={20} />
+                <span>Đã hoàn thành!</span>
+              </div>
+            )}
             
             <p className="shm-description">
               Khám phá dao động điều hòa qua thí nghiệm với lò xo và con lắc đơn.

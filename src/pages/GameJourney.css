@@ -679,6 +679,93 @@
   }
 }
 
+/* Game Stars */
+.game-stars {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.star-filled {
+  filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.5));
+}
+
+.star-empty {
+  opacity: 0.3;
+}
+
+/* Game Score */
+.game-score {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+}
+
+/* Loading Indicator */
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: white;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Login Prompt */
+.login-prompt {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: white;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.login-prompt p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.login-button {
+  padding: 0.75rem 1.5rem;
+  background: white;
+  color: #3b82f6;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .game-journey-container {

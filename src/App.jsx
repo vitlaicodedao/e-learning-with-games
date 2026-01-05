@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { GameProgressProvider } from './contexts/GameProgressContext';
 import Home from './pages/Home';
 import ProgramSelection from './pages/ProgramSelection';
 import Profile from './pages/Profile';
@@ -380,14 +381,16 @@ function App() {
   return (
     <Router>
       <AuthProvider>
+        <GameProgressProvider>
 
-        {/* HEADER - thêm component chuyển theme */}
-        <header style={{ padding: "10px" }}>
-          <ThemeSwitcher />
-        </header>
+          {/* HEADER - thêm component chuyển theme */}
+          <header style={{ padding: "10px" }}>
+            <ThemeSwitcher />
+          </header>
 
-        <AppContent />
+          <AppContent />
 
+        </GameProgressProvider>
       </AuthProvider>
       
     </Router>

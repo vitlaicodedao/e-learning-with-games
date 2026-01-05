@@ -465,3 +465,44 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Back button */
+.shm-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #CBD5E1;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.shm-back-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFF;
+}
+
+/* Completed badge */
+.shm-completed-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.2) 100%);
+  border: 2px solid #10B981;
+  border-radius: 12px;
+  color: #10B981;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.shm-completed-badge svg {
+  color: #FFD700;
+}
+

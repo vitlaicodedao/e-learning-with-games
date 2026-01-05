@@ -9,16 +9,26 @@ import { grade10Games } from '../areas/Vatly/data/grade10Games';
 import { grade11Games } from '../areas/Vatly/data/grade11Games';
 import { grade12Games } from '../areas/Vatly/data/grade12Games';
 import { useAuth } from '../contexts/AuthContext';
-import api from '../config/api';
+import { useGameProgress } from '../contexts/GameProgressContext';
 import './GameJourney.css';
 
 const GameJourney = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { 
+    progressByGrade, 
+    gameResults,
+    loading, 
+    loadGradeProgress, 
+    completeGame,
+    isGameCompleted,
+    isGameUnlocked,
+    getCurrentGame,
+    getTotalTrophies,
+    resetGradeProgress
+  } = useGameProgress();
+  
   const [selectedGrade, setSelectedGrade] = useState(11);
-  const [completedGames, setCompletedGames] = useState([]);
-  const [currentGame, setCurrentGame] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   // Lấy danh sách game theo lớp đã chọn
   const getGamesForGrade = (grade) => {
@@ -47,102 +57,36 @@ const GameJourney = () => {
     { id: 12, name: 'Lớp 12', icon: '⚛️', color: 'from-pink-400 to-pink-600' },
   ];
 
-  // Load tiến trình từ database khi component mount hoặc khi chuyển lớp
+  // Load progress khi component mount hoặc khi chuyển lớp
   useEffect(() => {
-    const loadProgress = async () => {
-      setLoading(true);
-      
-      // Nếu user đã đăng nhập
-      if (user && user.email) {
-        try {
-          const response = await api.get(`/users/physics-game-progress/${user.email}/${selectedGrade}`);
-          if (response.data.success) {
-            const dbProgress = response.data.progress;
-            setCompletedGames(dbProgress.completed || []);
-            setCurrentGame(dbProgress.current || games[0]?.id);
-            // Cập nhật localStorage từ DB để sync
-            localStorage.setItem(`physics-games-progress-grade-${selectedGrade}`, JSON.stringify(dbProgress));
-          } else {
-            // Không có data từ DB, reset
-            setCompletedGames([]);
-            setCurrentGame(games[0]?.id);
-            localStorage.removeItem(`physics-games-progress-grade-${selectedGrade}`);
-          }
-        } catch (error) {
-          // Nếu lỗi (user không tồn tại hoặc error khác), reset
-          setCompletedGames([]);
-          setCurrentGame(games[0]?.id);
-          localStorage.removeItem(`physics-games-progress-grade-${selectedGrade}`);
-        }
-      } else {
-        // User chưa đăng nhập, lấy từ localStorage
-        const savedProgress = localStorage.getItem(`physics-games-progress-grade-${selectedGrade}`);
-        if (savedProgress) {
-          const progress = JSON.parse(savedProgress);
-          setCompletedGames(progress.completed || []);
-          setCurrentGame(progress.current || games[0]?.id);
-        } else {
-          setCompletedGames([]);
-          setCurrentGame(games[0]?.id);
-        }
-      }
-      
-      setLoading(false);
-    };
+    loadGradeProgress(selectedGrade);
+  }, [selectedGrade, loadGradeProgress]);
 
-    loadProgress();
-  }, [selectedGrade, user]);
-
-  // Cập nhật currentGame khi games thay đổi (nhưng giữ nguyên completedGames)
+  // Load progress cho tất cả các lớp để hiển thị tổng trophies
   useEffect(() => {
-    if (games.length > 0 && !currentGame && !loading) {
-      setCurrentGame(games[0]?.id);
-    }
-  }, [games, currentGame, loading]);
+    grades.forEach(grade => {
+      loadGradeProgress(grade.id);
+    });
+  }, []);
 
-  // Lưu tiến trình vào localStorage và DB
-  const saveProgress = async (gameId) => {
-    const newCompleted = [...completedGames, gameId];
-    const nextGameIndex = games.findIndex(g => g.id === gameId) + 1;
-    const nextGame = games[nextGameIndex]?.id || null;
-
-    setCompletedGames(newCompleted);
-    setCurrentGame(nextGame);
-
-    const progressData = {
-      completed: newCompleted,
-      current: nextGame
-    };
-
-    // Lưu vào localStorage
-    localStorage.setItem(`physics-games-progress-grade-${selectedGrade}`, JSON.stringify(progressData));
-
-    // Lưu vào DB nếu user đã đăng nhập
-    if (user && user.email) {
-      try {
-        await api.post(`/users/physics-game-progress/${user.email}`, {
-          grade: selectedGrade,
-          completed: newCompleted,
-          current: nextGame
-        });
-      } catch (error) {
-        console.error('Error saving to database:', error);
-      }
-    }
-  };
+  // Lấy progress của grade hiện tại
+  const currentProgress = progressByGrade[selectedGrade] || { completed: [], current: null };
+  const completedGames = currentProgress.completed || [];
+  const currentGame = getCurrentGame(selectedGrade, games);
 
   // Kiểm tra game đã hoàn thành
-  const isCompleted = (gameId) => completedGames.includes(gameId);
+  const checkCompleted = (gameId) => isGameCompleted(gameId, selectedGrade);
 
-  // Kiểm tra game đang chơi
+  // Kiểm tra game đang chơi (game tiếp theo chưa hoàn thành)
   const isCurrent = (gameId) => gameId === currentGame;
 
   // Kiểm tra game bị khóa
-  const isLocked = (gameId) => {
-    const gameIndex = games.findIndex(g => g.id === gameId);
-    if (gameIndex === 0) return false;
-    const previousGame = games[gameIndex - 1];
-    return !isCompleted(previousGame.id);
+  const isLocked = (gameId) => !isGameUnlocked(gameId, selectedGrade, games);
+
+  // Lấy kết quả game (stars, score...)
+  const getGameResult = (gameId) => {
+    const gradeResults = gameResults[selectedGrade] || {};
+    return gradeResults[gameId] || null;
   };
 
   // Xử lý click vào game node
@@ -153,18 +97,23 @@ const GameJourney = () => {
     navigate(game.path);
   };
 
-  // Xử lý đánh dấu hoàn thành
-  const handleCompleteGame = (e, gameId) => {
-    e.stopPropagation(); // Ngăn không cho trigger handleGameClick
-    saveProgress(gameId);
+  // Xử lý đánh dấu hoàn thành (manual)
+  const handleCompleteGame = async (e, game) => {
+    e.stopPropagation();
+    
+    await completeGame({
+      gameId: game.id,
+      grade: selectedGrade,
+      chapter: game.chapter,
+      score: 100,
+      maxScore: 100
+    });
   };
 
-  // Xử lý reset tiến độ (nếu cần)
+  // Xử lý reset tiến độ
   const handleResetProgress = () => {
     if (confirm('Bạn có chắc muốn reset tiến độ không?')) {
-      setCompletedGames([]);
-      setCurrentGame(games[0]?.id);
-      localStorage.removeItem(`physics-games-progress-grade-${selectedGrade}`);
+      resetGradeProgress(selectedGrade);
     }
   };
 
@@ -192,19 +141,38 @@ const GameJourney = () => {
   const progress = totalGames > 0 ? Math.round((completedCount / totalGames) * 100) : 0;
 
   // Tính toán tổng cúp của tất cả các lớp
-  const getTotalTrophies = () => {
-    let total = 0;
-    grades.forEach(grade => {
-      const savedProgress = localStorage.getItem(`physics-games-progress-grade-${grade.id}`);
-      if (savedProgress) {
-        const progress = JSON.parse(savedProgress);
-        total += (progress.completed || []).length;
-      }
-    });
-    return total;
+  const totalTrophies = getTotalTrophies();
+
+  // Lấy progress cho từng lớp để hiển thị
+  const getGradeStats = (gradeId) => {
+    const gradeProgress = progressByGrade[gradeId] || { completed: [] };
+    const gradeGames = getGamesForGrade(gradeId);
+    const gradeCompleted = (gradeProgress.completed || []).length;
+    const gradeTotal = gradeGames.length;
+    const gradePercent = gradeTotal > 0 ? Math.round((gradeCompleted / gradeTotal) * 100) : 0;
+    
+    return { gradeCompleted, gradeTotal, gradePercent };
   };
 
-  const totalTrophies = getTotalTrophies();
+  // Render stars cho game đã hoàn thành
+  const renderStars = (gameId) => {
+    const result = getGameResult(gameId);
+    const stars = result?.stars || 0;
+    
+    return (
+      <div className="game-stars">
+        {[1, 2, 3].map(i => (
+          <Star
+            key={i}
+            size={14}
+            className={i <= stars ? 'star-filled' : 'star-empty'}
+            fill={i <= stars ? '#FFD700' : 'none'}
+            stroke={i <= stars ? '#FFD700' : '#666'}
+          />
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="game-journey-container">
@@ -249,11 +217,7 @@ const GameJourney = () => {
       {/* Grade Selector */}
       <div className="grade-selector">
         {grades.map(grade => {
-          // Tính tiến độ cho từng lớp
-          const gradeProgress = localStorage.getItem(`physics-games-progress-grade-${grade.id}`);
-          const gradeCompleted = gradeProgress ? JSON.parse(gradeProgress).completed?.length || 0 : 0;
-          const gradeTotal = getGamesForGrade(grade.id).length;
-          const gradePercent = gradeTotal > 0 ? Math.round((gradeCompleted / gradeTotal) * 100) : 0;
+          const { gradeCompleted, gradeTotal, gradePercent } = getGradeStats(grade.id);
           
           return (
             <button
@@ -299,6 +263,14 @@ const GameJourney = () => {
         </div>
       </div>
 
+      {/* Loading indicator */}
+      {loading && (
+        <div className="loading-indicator">
+          <div className="spinner"></div>
+          <span>Đang tải...</span>
+        </div>
+      )}
+
       {/* Journey Path */}
       <div className="journey-path">
         {chapters.map((chapter, chapterIndex) => (
@@ -307,16 +279,17 @@ const GameJourney = () => {
               <h2 className="chapter-title">Chương {chapter.number}</h2>
               <div className="chapter-stats">
                 <CheckCircle size={16} />
-                <span>{chapter.games.filter(g => isCompleted(g.id)).length}/{chapter.games.length}</span>
+                <span>{chapter.games.filter(g => checkCompleted(g.id)).length}/{chapter.games.length}</span>
               </div>
             </div>
 
             <div className="games-path">
               {chapter.games.map((game, gameIndex) => {
-                const completed = isCompleted(game.id);
+                const completed = checkCompleted(game.id);
                 const current = isCurrent(game.id);
                 const locked = isLocked(game.id);
                 const position = gameIndex % 2 === 0 ? 'left' : 'right';
+                const result = getGameResult(game.id);
 
                 return (
                   <div key={game.id} className="game-node-wrapper">
@@ -368,6 +341,16 @@ const GameJourney = () => {
                           </div>
                         </div>
 
+                        {/* Stars display for completed games */}
+                        {completed && renderStars(game.id)}
+
+                        {/* Score display */}
+                        {result && result.score !== undefined && (
+                          <div className="game-score">
+                            <span>Điểm: {result.score}/{result.maxScore || 100}</span>
+                          </div>
+                        )}
+
                         {!locked && (
                           <div className="node-actions">
                             <button 
@@ -379,7 +362,7 @@ const GameJourney = () => {
                             {!completed && (
                               <button 
                                 className="complete-button"
-                                onClick={(e) => handleCompleteGame(e, game.id)}
+                                onClick={(e) => handleCompleteGame(e, game)}
                                 title="Đánh dấu hoàn thành"
                               >
                                 <CheckCircle size={16} />
@@ -424,6 +407,16 @@ const GameJourney = () => {
           </div>
         )}
       </div>
+
+      {/* Login prompt if not logged in */}
+      {!user && (
+        <div className="login-prompt">
+          <p>Đăng nhập để lưu tiến độ của bạn!</p>
+          <button onClick={() => navigate('/login')} className="login-button">
+            Đăng nhập
+          </button>
+        </div>
+      )}
     </div>
   );
 };
