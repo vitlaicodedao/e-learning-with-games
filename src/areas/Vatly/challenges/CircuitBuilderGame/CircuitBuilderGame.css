@@ -1,0 +1,177 @@
+.circuit-builder-game {
+  min-height: 100vh;
+  background: #2c3e50;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cb-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cb-header h1 {
+  font-size: 1.8rem;
+  color: #f1c40f;
+}
+
+.cb-back-button, .cb-reset-button {
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.cb-back-button:hover, .cb-reset-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.cb-main-layout {
+  display: flex;
+  gap: 20px;
+  flex-grow: 1;
+}
+
+.cb-toolbar {
+  width: 200px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.cb-toolbar h3 {
+  color: #3498db;
+  margin-bottom: 15px;
+}
+
+.cb-tool-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.cb-tool-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.cb-tool-btn.selected {
+  background: rgba(52, 152, 219, 0.4);
+  border-color: #3498db;
+}
+
+.cb-canvas-container {
+  flex-grow: 1;
+}
+
+.cb-canvas-container canvas {
+  background: #233142;
+  border-radius: 10px;
+  cursor: crosshair;
+  width: 100%;
+  height: 100%;
+}
+
+.cb-info-panel {
+  width: 250px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.cb-info-panel h3 {
+  color: #2ecc71;
+  margin-bottom: 15px;
+}
+
+.cb-info-panel p {
+  margin: 8px 0;
+  font-size: 0.95rem;
+}
+
+.cb-bulb-status {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* Tutorial Overlay */
+.cb-tutorial-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.cb-tutorial-content {
+  background: #34495e;
+  padding: 40px;
+  border-radius: 15px;
+  max-width: 600px;
+  text-align: center;
+  border: 2px solid #3498db;
+}
+
+.cb-tutorial-icon {
+  color: #3498db;
+  margin-bottom: 20px;
+}
+
+.cb-tutorial-content h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.cb-tutorial-text {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.cb-tutorial-text h3 {
+  color: #3498db;
+  margin-bottom: 10px;
+}
+
+.cb-tutorial-text ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cb-tutorial-text li {
+  padding: 8px 0;
+  border-bottom: 1px solid #2c3e50;
+}
+
+.cb-start-button {
+  padding: 15px 30px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}

@@ -1,0 +1,161 @@
+.electric-charge-lab {
+  min-height: 100vh;
+  background: #34495e;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.ec-header {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.ec-header h1 {
+  font-size: 1.8rem;
+  color: #f1c40f;
+}
+
+.ec-back-button, .ec-reset-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ec-back-button:hover, .ec-reset-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.ec-main-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  cursor: grab;
+}
+
+.ec-main-content:active {
+  cursor: grabbing;
+}
+
+.ec-main-content canvas {
+  background: #2c3e50;
+  border-radius: 15px;
+  border: 2px solid #f1c40f;
+  width: 100%;
+}
+
+.ec-message-bar {
+  width: 100%;
+  padding: 15px;
+  margin-top: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #ecf0f1;
+}
+
+.ec-legend {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 15px 25px;
+  border-radius: 10px;
+}
+
+.ec-legend div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.charge-positive, .charge-negative {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.charge-positive { color: #e74c3c; }
+.charge-negative { color: #3498db; }
+
+/* Tutorial Overlay */
+.ec-tutorial-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.ec-tutorial-content {
+  background: #34495e;
+  padding: 40px;
+  border-radius: 15px;
+  max-width: 600px;
+  text-align: center;
+  border: 2px solid #f1c40f;
+}
+
+.ec-tutorial-icon {
+  color: #f1c40f;
+  margin-bottom: 20px;
+}
+
+.ec-tutorial-content h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.ec-tutorial-text {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.ec-tutorial-text h3 {
+  color: #f1c40f;
+  margin-bottom: 10px;
+}
+
+.ec-tutorial-text ul {
+  list-style: none;
+  padding: 0;
+}
+
+.ec-tutorial-text li {
+  padding: 8px 0;
+  border-bottom: 1px solid #2c3e50;
+}
+
+.ec-start-button {
+  padding: 15px 30px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.ec-start-button:hover {
+  background: #2ecc71;
+}

@@ -1,0 +1,1748 @@
+/* ===== Container & Layout ===== */
+.suy-luan-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 12px;
+}
+
+.game-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ===== Header ===== */
+.suy-luan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateX(-5px);
+}
+
+.game-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  font-size: 20px;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.title-icon {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ===== Lab Container ===== */
+.lab-container {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 12px;
+}
+
+.lab-instruction {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  padding: 10px;
+  background: #e3f2fd;
+  border-left: 3px solid #2196f3;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  color: #1565c0;
+  font-size: 12px;
+}
+
+.lab-instruction p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.difficulty-badge {
+  margin-left: 10px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.difficulty-badge.easy { background: #c8e6c9; color: #2e7d32; }
+.difficulty-badge.medium { background: #fff9c4; color: #f57f17; }
+.difficulty-badge.hard { background: #ffcdd2; color: #c62828; }
+
+/* Reagents section */
+.reagents-section {
+  margin-bottom: 2rem;
+}
+
+.reagents-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.reagents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.reagent-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 2px solid #e5e7eb;
+  background: white;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reagent-btn:hover:not(:disabled) {
+  border-color: #667eea;
+  background: #f3f4f6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.reagent-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.reagent-btn.used {
+  background: #f0fdf4;
+  border-color: #10b981;
+}
+
+.reagent-btn.dropping {
+  animation: pulse 0.5s ease-in-out;
+}
+
+.reagent-tube {
+  width: 40px;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent 30%, #667eea 30%, #667eea 100%);
+  border: 2px solid #9ca3af;
+  border-radius: 0 0 0.5rem 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.reagent-liquid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70%;
+  background: linear-gradient(to bottom, rgba(102, 126, 234, 0.8), rgba(102, 126, 234, 1));
+  animation: liquidBubble 2s ease-in-out infinite;
+}
+
+/* Giấy quỳ tím */
+.reagent-litmus {
+  width: 50px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.litmus-paper {
+  width: 35px;
+  height: 70px;
+  background: #9c27b0;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Que kim loại */
+.reagent-metal {
+  width: 50px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.metal-rod {
+  width: 8px;
+  height: 75px;
+  background: linear-gradient(90deg, #90a4ae 0%, #cfd8dc 50%, #90a4ae 100%);
+  border-radius: 4px;
+  box-shadow: 
+    inset -2px 0 4px rgba(0, 0, 0, 0.2),
+    inset 2px 0 4px rgba(255, 255, 255, 0.3),
+    2px 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.metal-rod::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 2px;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  border-radius: 2px;
+}
+
+.metal-rod::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: inherit;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes liquidBubble {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+.reagent-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  text-align: center;
+}
+
+.check-mark {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  color: #10b981;
+  font-size: 1.25rem;
+}
+
+/* Experiment area */
+.experiment-area {
+  margin-bottom: 2rem;
+}
+
+.beakers-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.5rem;
+  max-width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .beakers-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .beakers-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.beaker-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.lab-stand {
+  position: relative;
+  height: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border: 2px solid #dee2e6;
+}
+
+/* Dropper animation */
+.dropper-animation {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  animation: dropperMove 1.5s ease-in-out;
+}
+
+@keyframes dropperMove {
+  0% { transform: translateX(-50%) translateY(-20px); opacity: 0; }
+  20% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  80% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  100% { transform: translateX(-50%) translateY(20px); opacity: 0; }
+}
+
+.dropper {
+  width: 30px;
+  height: 100px;
+  position: relative;
+}
+
+.dropper-bulb {
+  width: 30px;
+  height: 40px;
+  background: linear-gradient(to bottom, #ff9800, #ff6f00);
+  border-radius: 50% 50% 20% 20%;
+  margin-bottom: -5px;
+}
+
+.dropper-tip {
+  width: 8px;
+  height: 60px;
+  background: linear-gradient(to bottom, #90a4ae, #607d8b);
+  margin: 0 auto;
+  border-radius: 0 0 2px 2px;
+}
+
+.drop {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: #667eea;
+  border-radius: 50%;
+  animation: falling 1s ease-in forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes falling {
+  0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  100% { transform: translateX(-50%) translateY(150px); opacity: 0; }
+}
+
+/* Animation cho giấy quỳ nhúng vào */
+.litmus-dipping {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  animation: litmusDip 1.5s ease-in-out;
+}
+
+@keyframes litmusDip {
+  0% { transform: translateX(-50%) translateY(-30px); opacity: 0; }
+  20% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  50% { transform: translateX(-50%) translateY(80px); opacity: 1; }
+  70% { transform: translateX(-50%) translateY(80px); opacity: 1; }
+  100% { transform: translateX(-50%) translateY(-30px); opacity: 0; }
+}
+
+.litmus-paper-dip {
+  width: 35px;
+  height: 70px;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Phần trên giữ màu tím */
+.litmus-top {
+  width: 100%;
+  height: 50%;
+  background: #9c27b0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  border-radius: 2px 2px 0 0;
+}
+
+/* Phần dưới đổi màu khi nhúng vào */
+.litmus-bottom {
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  border-radius: 0 0 2px 2px;
+  animation: litmusColorChange 1.5s ease-in-out forwards;
+}
+
+@keyframes litmusColorChange {
+  0%, 40% { 
+    background: #9c27b0;
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  60%, 100% { 
+    background: var(--litmus-changed-color, #e91e63);
+    opacity: 1;
+  }
+}
+
+.litmus-paper-dip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: none;
+}
+
+/* Animation cho que kim loại nhúng vào */
+.metal-dipping {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  animation: metalDip 1.5s ease-in-out;
+}
+
+@keyframes metalDip {
+  0% { transform: translateX(-50%) translateY(-30px); opacity: 0; }
+  20% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  50% { transform: translateX(-50%) translateY(100px); opacity: 1; }
+  70% { transform: translateX(-50%) translateY(100px); opacity: 1; }
+  100% { transform: translateX(-50%) translateY(-30px); opacity: 0; }
+}
+
+.metal-rod-dip {
+  width: 10px;
+  height: 120px;
+  border-radius: 5px;
+  box-shadow: 
+    inset -2px 0 4px rgba(0, 0, 0, 0.3),
+    inset 2px 0 4px rgba(255, 255, 255, 0.4),
+    2px 2px 8px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Phần trên: Màu kim loại gốc */
+.metal-rod-top {
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: linear-gradient(90deg, #90a4ae 0%, #cfd8dc 50%, #90a4ae 100%);
+  border-radius: 5px 5px 0 0;
+}
+
+/* Phần dưới: Đổi màu khi nhúng vào dung dịch */
+.metal-rod-bottom {
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  border-radius: 0 0 5px 5px;
+  animation: metalColorChange 1.5s ease-in-out forwards;
+}
+
+@keyframes metalColorChange {
+  0%, 40% { 
+    background: linear-gradient(90deg, #90a4ae 0%, #cfd8dc 50%, #90a4ae 100%);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  60%, 100% { 
+    background: var(--metal-changed-color, linear-gradient(90deg, #90a4ae 0%, #cfd8dc 50%, #90a4ae 100%));
+    opacity: 1;
+  }
+}
+
+.metal-rod-dip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 3px;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  border-radius: 2px;
+  z-index: 3;
+}
+
+.metal-rod-dip::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: var(--metal-changed-color, linear-gradient(90deg, #90a4ae 0%, #cfd8dc 50%, #90a4ae 100%));
+  border-radius: 50%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  z-index: 4;
+}
+
+/* Erlenmeyer Flask - Enhanced Design */
+.erlenmeyer-flask {
+  position: relative;
+  width: 140px;
+  height: 200px;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.erlenmeyer-flask:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.25));
+}
+
+.flask-neck {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(
+    to bottom,
+    rgba(200, 200, 200, 0.3) 0%,
+    rgba(180, 180, 180, 0.25) 100%
+  );
+  border: 3px solid rgba(100, 100, 100, 0.4);
+  border-bottom: 2px solid rgba(100, 100, 100, 0.3);
+  margin: 0 auto;
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Ánh sáng phản chiếu cổ bình */
+.flask-neck::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 8px;
+  width: 15px;
+  height: 20px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  border-radius: 4px;
+  pointer-events: none;
+  filter: blur(1px);
+}
+
+.flask-body {
+  width: 140px;
+  height: 180px;
+  background: linear-gradient(
+    135deg,
+    rgba(230, 245, 255, 0.4) 0%,
+    rgba(210, 235, 250, 0.3) 25%,
+    rgba(200, 230, 255, 0.25) 50%,
+    rgba(220, 240, 255, 0.3) 75%,
+    rgba(235, 250, 255, 0.35) 100%
+  );
+  border: 4px solid rgba(100, 150, 200, 0.5);
+  border-top: none;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(15% 0, 85% 0, 100% 100%, 0% 100%);
+  border-radius: 0 0 70px 70px / 0 0 30px 30px;
+  margin: 0 auto;
+  box-shadow: 
+    inset -3px -3px 10px rgba(0, 0, 0, 0.08),
+    inset 3px 3px 10px rgba(255, 255, 255, 0.4),
+    inset 0 0 30px rgba(100, 180, 255, 0.15),
+    0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Hiệu ứng thủy tinh sáng bóng chính */
+.flask-body::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  width: 35px;
+  height: 85%;
+  background: linear-gradient(
+    to bottom, 
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(255, 255, 255, 0.4) 30%,
+    rgba(255, 255, 255, 0.2) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 10;
+  border-radius: 50px 0 0 50px;
+}
+
+/* Vạch chia độ với số đo */
+.flask-body::before {
+  content: '';
+  position: absolute;
+  right: 18px;
+  top: 12%;
+  width: 22px;
+  height: 76%;
+  background: 
+    linear-gradient(to bottom, transparent 0%, transparent 10%, rgba(80, 120, 160, 0.5) 10%, rgba(80, 120, 160, 0.5) 11.5%, transparent 11.5%),
+    linear-gradient(to bottom, transparent 0%, transparent 28%, rgba(80, 120, 160, 0.5) 28%, rgba(80, 120, 160, 0.5) 29.5%, transparent 29.5%),
+    linear-gradient(to bottom, transparent 0%, transparent 46%, rgba(100, 140, 180, 0.6) 46%, rgba(100, 140, 180, 0.6) 48%, transparent 48%),
+    linear-gradient(to bottom, transparent 0%, transparent 64%, rgba(80, 120, 160, 0.5) 64%, rgba(80, 120, 160, 0.5) 65.5%, transparent 65.5%),
+    linear-gradient(to bottom, transparent 0%, transparent 82%, rgba(80, 120, 160, 0.5) 82%, rgba(80, 120, 160, 0.5) 83.5%, transparent 83.5%);
+  opacity: 0.85;
+  z-index: 5;
+}
+
+.unknown-solution {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+/* Hiệu ứng ánh sáng lấp lánh chính */
+.unknown-solution::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 8%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.35) 20%,
+    rgba(255, 255, 255, 0.2) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 8;
+  clip-path: polygon(0 0, 100% 0, 75% 100%, 0 100%);
+  filter: blur(2px);
+}
+
+/* Hiệu ứng bóng đổ bên phải */
+.unknown-solution::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 8%;
+  width: 35%;
+  height: 70%;
+  background: linear-gradient(
+    to top left,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.12) 30%,
+    rgba(0, 0, 0, 0.05) 60%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 1;
+  clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.precipitate {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  animation: precipitateFall 2s ease-out forwards;
+  transform-origin: bottom;
+  z-index: 3;
+  border-radius: 0 0 8px 8px;
+  /* Shadow rõ nét hơn - chất kết tủa thật */
+  box-shadow: 
+    0 -12px 35px rgba(0, 0, 0, 0.6),
+    inset 0 8px 20px rgba(255, 255, 255, 0.5),
+    inset 0 -6px 18px rgba(0, 0, 0, 0.4);
+  /* Texture kết tủa hạt rõ ràng - giống chất kết tủa thật */
+  background-image: 
+    /* Hạt lớn rõ */
+    radial-gradient(circle at 20% 25%, rgba(255, 255, 255, 0.9) 0%, transparent 8%),
+    radial-gradient(circle at 70% 45%, rgba(255, 255, 255, 0.85) 0%, transparent 7%),
+    radial-gradient(circle at 40% 70%, rgba(255, 255, 255, 0.9) 0%, transparent 8%),
+    radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.85) 0%, transparent 7%),
+    radial-gradient(circle at 15% 80%, rgba(255, 255, 255, 0.9) 0%, transparent 8%),
+    /* Hạt trung */
+    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.75) 0%, transparent 5%),
+    radial-gradient(circle at 80% 65%, rgba(255, 255, 255, 0.7) 0%, transparent 5.5%),
+    radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.75) 0%, transparent 5%),
+    radial-gradient(circle at 10% 35%, rgba(255, 255, 255, 0.7) 0%, transparent 5.5%),
+    radial-gradient(circle at 65% 85%, rgba(255, 255, 255, 0.75) 0%, transparent 5%),
+    /* Hạt nhỏ */
+    radial-gradient(circle at 45% 15%, rgba(255, 255, 255, 0.6) 0%, transparent 3%),
+    radial-gradient(circle at 90% 55%, rgba(255, 255, 255, 0.55) 0%, transparent 3.5%),
+    radial-gradient(circle at 25% 60%, rgba(255, 255, 255, 0.6) 0%, transparent 3%),
+    radial-gradient(circle at 55% 90%, rgba(255, 255, 255, 0.55) 0%, transparent 3.5%);
+  filter: contrast(1.2) brightness(1.05);
+}
+
+/* Gradient chuyển tiếp từ dung dịch xuống kết tủa - Rõ hơn */
+.precipitate::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 0;
+  right: 0;
+  height: 65px;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0.3) 40%,
+    rgba(255, 255, 255, 0.5) 65%,
+    currentColor 100%);
+  opacity: 0.85;
+  filter: blur(8px);
+  z-index: -1;
+}
+
+/* Lớp kết tủa đậm đặc ở đáy - Rõ ràng hơn */
+.precipitate::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 65%;
+  background: linear-gradient(to top, 
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.3) 35%,
+    rgba(0, 0, 0, 0.15) 65%,
+    transparent 100%);
+  border-radius: 0 0 8px 8px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+@keyframes precipitateFall {
+  0% {
+    bottom: 75%;
+    opacity: 0;
+    transform: scale(0.15);
+    filter: blur(8px) brightness(1.3);
+  }
+  8% {
+    opacity: 0.35;
+    filter: blur(6px) brightness(1.25);
+  }
+  18% {
+    opacity: 0.6;
+    filter: blur(4px) brightness(1.15);
+  }
+  30% {
+    opacity: 0.8;
+    filter: blur(2px) brightness(1.08);
+  }
+  45% {
+    opacity: 0.92;
+    filter: blur(1px) brightness(1.03);
+  }
+  60% {
+    opacity: 1;
+    filter: blur(0.5px) brightness(1);
+  }
+  75% {
+    bottom: 2%;
+    opacity: 1;
+    transform: scale(1.12);
+    filter: blur(0) brightness(1);
+  }
+  88% {
+    bottom: 0;
+    transform: scale(0.94);
+  }
+  100% {
+    bottom: 0;
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0) brightness(1);
+  }
+}
+
+/* Hạt kết tủa lắng xuống - RÕ RÀNG HƠN */
+.precipitate-particles {
+  position: absolute;
+  top: -75%;
+  left: 0;
+  right: 0;
+  height: 180%;
+  pointer-events: none;
+  z-index: 4;
+  overflow: visible;
+}
+
+.precipitate-particle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  opacity: 0;
+  animation: particleFall linear forwards;
+  /* Shadow rõ nét hơn */
+  box-shadow: 
+    0 3px 8px rgba(0, 0, 0, 0.7),
+    inset -3px -3px 6px rgba(0, 0, 0, 0.5),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.8);
+  /* Gradient 3D sắc nét */
+  background: radial-gradient(circle at 20% 20%, 
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.7) 20%,
+    rgba(255, 255, 255, 0.4) 45%,
+    currentColor 100%);
+  filter: contrast(1.4) brightness(1.15);
+}
+
+/* Hạt nhỏ */
+.precipitate-particle.small {
+  width: 8px;
+  height: 8px;
+}
+
+/* Hạt trung bình */
+.precipitate-particle.medium {
+  width: 12px;
+  height: 12px;
+}
+
+/* Hạt lớn */
+.precipitate-particle.large {
+  width: 16px;
+  height: 16px;
+}
+
+@keyframes particleFall {
+  0% {
+    top: 0;
+    opacity: 0;
+    transform: translateY(0) translateX(0) scale(0) rotate(0deg);
+  }
+  3% {
+    opacity: 0.5;
+    transform: translateY(3px) translateX(1px) scale(0.4) rotate(15deg);
+  }
+  8% {
+    opacity: 0.9;
+    transform: translateY(8%) translateX(3px) scale(0.7) rotate(35deg);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(15%) translateX(-4px) scale(1.15) rotate(70deg);
+  }
+  25% {
+    opacity: 1;
+    transform: translateY(25%) translateX(6px) scale(1.25) rotate(110deg);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(40%) translateX(-5px) scale(1.2) rotate(180deg);
+  }
+  55% {
+    opacity: 0.98;
+    transform: translateY(55%) translateX(4px) scale(1.15) rotate(250deg);
+  }
+  70% {
+    opacity: 0.95;
+    transform: translateY(70%) translateX(-3px) scale(1.1) rotate(310deg);
+  }
+  85% {
+    opacity: 0.9;
+    transform: translateY(85%) translateX(2px) scale(1.05) rotate(350deg);
+  }
+  95% {
+    opacity: 0.85;
+    transform: translateY(95%) translateX(-1px) scale(1) rotate(370deg);
+  }
+  100% {
+    top: 100%;
+    opacity: 0.8;
+    transform: translateY(100%) translateX(0) scale(0.95) rotate(360deg);
+  }
+}
+
+/* Hiệu ứng sủi bọt khí - LÀM LẠI HOÀN TOÀN */
+.bubbles-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  pointer-events: none;
+  z-index: 6;
+  overflow: visible;
+}
+
+.bubble {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50%;
+  animation: bubbleRise linear infinite;
+  box-shadow: 
+    inset -3px -3px 6px rgba(0, 0, 0, 0.15),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.9),
+    0 0 8px rgba(255, 255, 255, 0.7),
+    0 2px 6px rgba(0, 0, 0, 0.2);
+  /* Gradient 3D siêu thực */
+  background: radial-gradient(circle at 25% 25%, 
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.85) 20%,
+    rgba(255, 255, 255, 0.6) 45%,
+    rgba(255, 255, 255, 0.35) 70%,
+    rgba(255, 255, 255, 0.15) 90%,
+    rgba(255, 255, 255, 0.05) 100%);
+  /* Viền sáng */
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  filter: brightness(1.15);
+}
+
+/* Bong bóng rất nhỏ */
+.bubble.tiny {
+  width: 4px;
+  height: 4px;
+}
+
+/* Bong bóng nhỏ */
+.bubble.small {
+  width: 8px;
+  height: 8px;
+}
+
+/* Bong bóng trung bình */
+.bubble.medium {
+  width: 12px;
+  height: 12px;
+}
+
+/* Bong bóng lớn */
+.bubble.large {
+  width: 18px;
+  height: 18px;
+}
+
+/* Bong bóng rất lớn */
+.bubble.xlarge {
+  width: 24px;
+  height: 24px;
+}
+
+@keyframes bubbleRise {
+  0% {
+    bottom: 0;
+    opacity: 0;
+    transform: translateX(0) scale(0.2) rotate(0deg);
+  }
+  3% {
+    opacity: 0.5;
+    transform: translateX(0) scale(0.5) rotate(8deg);
+  }
+  8% {
+    opacity: 0.8;
+    transform: translateX(2px) scale(0.75) rotate(20deg);
+  }
+  15% {
+    opacity: 1;
+    transform: translateX(4px) scale(1) rotate(40deg);
+  }
+  25% {
+    transform: translateX(10px) scale(1.15) rotate(70deg);
+  }
+  40% {
+    transform: translateX(-6px) scale(1.1) rotate(120deg);
+  }
+  55% {
+    transform: translateX(8px) scale(1.05) rotate(180deg);
+  }
+  70% {
+    opacity: 0.95;
+    transform: translateX(-4px) scale(0.95) rotate(240deg);
+  }
+  85% {
+    opacity: 0.7;
+    transform: translateX(5px) scale(0.75) rotate(300deg);
+  }
+  95% {
+    opacity: 0.35;
+    transform: translateX(-2px) scale(0.45) rotate(350deg);
+  }
+  100% {
+    bottom: 100%;
+    opacity: 0;
+    transform: translateX(0) scale(0.15) rotate(360deg);
+  }
+}
+
+/* Hiệu ứng bay hơi/thoát khí - LÀM LẠI HOÀN TOÀN */
+.vapor-effect {
+  position: absolute;
+  top: -15%;
+  left: 0;
+  right: 0;
+  height: 20%;
+  pointer-events: none;
+  z-index: 8;
+  overflow: visible;
+}
+
+.vapor-particle {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  opacity: 0;
+  animation: vaporRise linear infinite;
+  background: radial-gradient(circle at 30% 30%, 
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.75) 25%,
+    rgba(240, 240, 240, 0.5) 50%,
+    rgba(220, 220, 220, 0.25) 75%,
+    rgba(200, 200, 200, 0.08) 100%);
+  filter: blur(2.5px);
+  box-shadow: 
+    0 0 12px rgba(255, 255, 255, 0.7),
+    inset -3px -3px 6px rgba(0, 0, 0, 0.12),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Hơi nhỏ */
+.vapor-particle.small {
+  width: 20px;
+  height: 20px;
+}
+
+/* Hơi trung */
+.vapor-particle.medium {
+  width: 30px;
+  height: 30px;
+}
+
+/* Hơi lớn */
+.vapor-particle.large {
+  width: 40px;
+  height: 40px;
+}
+
+@keyframes vaporRise {
+  0% {
+    bottom: 0;
+    opacity: 0;
+    transform: translateX(0) translateY(0) scale(0.3);
+  }
+  5% {
+    opacity: 0.5;
+    transform: translateX(4px) translateY(-12px) scale(0.6);
+  }
+  12% {
+    opacity: 0.75;
+    transform: translateX(-8px) translateY(-28px) scale(0.85);
+  }
+  20% {
+    opacity: 0.85;
+    transform: translateX(12px) translateY(-45px) scale(1.1);
+  }
+  30% {
+    opacity: 0.8;
+    transform: translateX(-10px) translateY(-70px) scale(1.35);
+  }
+  45% {
+    opacity: 0.75;
+    transform: translateX(15px) translateY(-100px) scale(1.65);
+  }
+  60% {
+    opacity: 0.6;
+    transform: translateX(-12px) translateY(-140px) scale(2);
+  }
+  75% {
+    opacity: 0.4;
+    transform: translateX(10px) translateY(-185px) scale(2.4);
+  }
+  88% {
+    opacity: 0.2;
+    transform: translateX(-6px) translateY(-235px) scale(2.8);
+  }
+  97% {
+    opacity: 0.05;
+    transform: translateX(4px) translateY(-280px) scale(3.2);
+  }
+  100% {
+    bottom: 150%;
+    opacity: 0;
+    transform: translateX(0) translateY(-310px) scale(3.5);
+  }
+}
+
+/* Khói bay - cho phản ứng tỏa nhiệt - LÀM LẠI HOÀN TOÀN */
+.smoke-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  pointer-events: none;
+  z-index: 7;
+  overflow: visible;
+}
+
+.smoke-particle {
+  position: absolute;
+  bottom: 35%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  opacity: 0;
+  animation: smokeRise ease-out infinite;
+  background: radial-gradient(circle at 40% 40%, 
+    rgba(220, 220, 220, 0.75) 0%,
+    rgba(190, 190, 190, 0.55) 25%,
+    rgba(160, 160, 160, 0.35) 50%,
+    rgba(140, 140, 140, 0.18) 75%,
+    rgba(120, 120, 120, 0.06) 100%);
+  filter: blur(5px);
+  box-shadow: 
+    0 0 15px rgba(150, 150, 150, 0.5),
+    inset -4px -4px 8px rgba(0, 0, 0, 0.2),
+    inset 4px 4px 8px rgba(255, 255, 255, 0.35);
+}
+
+/* Khói nhỏ */
+.smoke-particle.small {
+  width: 30px;
+  height: 30px;
+}
+
+/* Khói trung */
+.smoke-particle.medium {
+  width: 45px;
+  height: 45px;
+}
+
+/* Khói lớn */
+.smoke-particle.large {
+  width: 60px;
+  height: 60px;
+}
+
+@keyframes smokeRise {
+  0% {
+    bottom: 35%;
+    opacity: 0;
+    transform: translateX(0) translateY(0) scale(0.3) rotate(0deg);
+  }
+  5% {
+    opacity: 0.4;
+    transform: translateX(5px) translateY(-15px) scale(0.5) rotate(20deg);
+  }
+  12% {
+    opacity: 0.65;
+    transform: translateX(-10px) translateY(-35px) scale(0.75) rotate(-25deg);
+  }
+  22% {
+    opacity: 0.75;
+    transform: translateX(14px) translateY(-65px) scale(1) rotate(35deg);
+  }
+  35% {
+    opacity: 0.7;
+    transform: translateX(-12px) translateY(-100px) scale(1.3) rotate(-45deg);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateX(18px) translateY(-145px) scale(1.65) rotate(55deg);
+  }
+  65% {
+    opacity: 0.45;
+    transform: translateX(-14px) translateY(-200px) scale(2) rotate(-65deg);
+  }
+  80% {
+    opacity: 0.28;
+    transform: translateX(16px) translateY(-265px) scale(2.5) rotate(80deg);
+  }
+  92% {
+    opacity: 0.12;
+    transform: translateX(-10px) translateY(-330px) scale(3) rotate(-90deg);
+  }
+  98% {
+    opacity: 0.04;
+    transform: translateX(6px) translateY(-385px) scale(3.5) rotate(100deg);
+  }
+  100% {
+    bottom: 130%;
+    opacity: 0;
+    transform: translateX(0) translateY(-420px) scale(3.8) rotate(110deg);
+  }
+}
+
+/* Tờ quỳ trong dung dịch */
+.litmus-in-solution {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  animation: litmusFloat 2s ease-in-out infinite;
+}
+
+@keyframes litmusFloat {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotate(-2deg);
+  }
+  50% {
+    transform: translate(-50%, -48%) rotate(2deg);
+  }
+}
+
+.litmus-paper-in-flask {
+  width: 30px;
+  height: 60px;
+  border-radius: 3px;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  animation: litmusPaperAppear 0.8s ease-out;
+}
+
+@keyframes litmusPaperAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.5) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Thanh kim loại trong dung dịch */
+.metal-in-solution {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  animation: metalFloat 2s ease-in-out infinite;
+}
+
+@keyframes metalFloat {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotate(-1deg);
+  }
+  50% {
+    transform: translate(-50%, -48%) rotate(1deg);
+  }
+}
+
+.metal-rod-in-flask {
+  width: 8px;
+  height: 80px;
+  border-radius: 4px;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    inset -1px 0 2px rgba(0, 0, 0, 0.2),
+    inset 1px 0 2px rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  animation: metalRodAppear 0.8s ease-out;
+}
+
+@keyframes metalRodAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.5) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Phần trên: Màu kim loại gốc */
+.metal-top {
+  width: 100%;
+  height: 40%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 4px 4px 0 0;
+}
+
+/* Phần dưới: Màu đã phủ lớp kim loại mới */
+.metal-bottom {
+  width: 100%;
+  height: 60%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 0 0 4px 4px;
+}
+
+.flask-label {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.98);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #2c3e50;
+  z-index: 15;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(90, 122, 133, 0.3);
+  letter-spacing: 0.3px;
+}
+
+.solution-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f3f4f6;
+  border-radius: 0.5rem;
+}
+
+.info-label {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.info-value {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* Test results */
+.test-results {
+  background: #f9fafb;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 2px solid #e5e7eb;
+}
+
+.test-results h3 {
+  margin: 0 0 1rem 0;
+  color: #1f2937;
+}
+
+.no-tests {
+  color: #6b7280;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem;
+}
+
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.result-item {
+  background: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border-left: 4px solid #667eea;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.result-header {
+  margin-bottom: 0.75rem;
+  color: #1f2937;
+}
+
+.result-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Tờ quỳ trong kết quả */
+.litmus-result {
+  flex-shrink: 0;
+}
+
+.litmus-paper-result {
+  width: 40px;
+  height: 80px;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  animation: paperAppear 0.5s ease-out;
+}
+
+@keyframes paperAppear {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Thanh kim loại trong kết quả */
+.metal-result {
+  flex-shrink: 0;
+}
+
+.metal-rod-result {
+  width: 12px;
+  height: 90px;
+  border-radius: 6px;
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.2),
+    inset -1px 0 2px rgba(0, 0, 0, 0.2),
+    inset 1px 0 2px rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  animation: paperAppear 0.5s ease-out;
+}
+
+/* Phần trên: Màu kim loại gốc */
+.metal-result-top {
+  width: 100%;
+  height: 35%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 6px 6px 0 0;
+}
+
+/* Phần dưới: Màu đã phủ lớp kim loại mới */
+.metal-result-bottom {
+  width: 100%;
+  height: 65%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 0 0 6px 6px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.result-phenomenon {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  background: #fef3c7;
+  border-radius: 0.25rem;
+}
+
+.phenomenon-label {
+  font-weight: 600;
+  color: #92400e;
+  margin-right: 0.5rem;
+}
+
+.phenomenon-text {
+  color: #78350f;
+}
+
+.result-equation {
+  padding: 0.5rem;
+  background: #f3f4f6;
+  border-radius: 0.25rem;
+}
+
+.equation-label {
+  font-weight: 600;
+  color: #374151;
+  margin-right: 0.5rem;
+}
+
+.result-equation code {
+  font-family: 'Courier New', monospace;
+  color: #667eea;
+  font-size: 0.875rem;
+}
+
+/* Answer section */
+.answer-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 0.75rem;
+  border: 2px solid #dee2e6;
+}
+
+.answer-section h3 {
+  margin: 0 0 1rem 0;
+  color: #1f2937;
+}
+
+.ion-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ion-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 2px solid #e5e7eb;
+  background: white;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ion-option:hover {
+  border-color: #667eea;
+  background: #f3f4f6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.ion-option.selected {
+  border-color: #667eea;
+  background: #e0e7ff;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.ion-formula {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.ion-name {
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.submit-section {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.reset-btn,
+.submit-btn {
+  padding: 0.875rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.reset-btn {
+  background: white;
+  color: #6b7280;
+  border: 2px solid #e5e7eb;
+}
+
+.reset-btn:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.submit-btn {
+  background: #667eea;
+  color: white;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Answer result */
+.answer-result {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  animation: slideDown 0.3s ease;
+}
+
+.answer-result.correct {
+  background: #d1fae5;
+  border-left: 4px solid #10b981;
+}
+
+.answer-result.incorrect {
+  background: #fee2e2;
+  border-left: 4px solid #ef4444;
+}
+
+.answer-result h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.answer-result.correct h3 {
+  color: #065f46;
+}
+
+.answer-result.incorrect h3 {
+  color: #991b1b;
+}
+
+.correct-answer {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 0.5rem;
+}
+
+.correct-answer p {
+  margin: 0;
+  color: #1f2937;
+  font-size: 1.125rem;
+}
+
+.explanation-section {
+  margin-top: 1.5rem;
+}
+
+.explanation-section h4 {
+  margin: 0 0 1rem 0;
+  color: #1f2937;
+}
+
+.all-reactions {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 0.5rem;
+}
+
+.all-reactions p {
+  margin: 0 0 0.75rem 0;
+  font-weight: 600;
+  color: #374151;
+}
+
+.all-reactions ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.all-reactions li {
+  margin-bottom: 1rem;
+  color: #4b5563;
+  line-height: 1.8;
+}
+
+.all-reactions strong {
+  color: #667eea;
+}
+
+.all-reactions code {
+  display: block;
+  margin-top: 0.25rem;
+  padding: 0.5rem;
+  background: #f3f4f6;
+  border-radius: 0.25rem;
+  font-family: 'Courier New', monospace;
+  color: #667eea;
+  font-size: 0.875rem;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Hint section */
+.hint-section {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .suy-luan-container {
+    padding: 12px;
+  }
+
+  .suy-luan-header {
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .game-title {
+    font-size: 20px;
+  }
+
+  .result-actions {
+    flex-direction: column;
+  }
+
+  .btn-restart,
+  .btn-home {
+    width: 100%;
+  }
+}

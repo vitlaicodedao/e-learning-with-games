@@ -1,0 +1,82 @@
+.atom-area {
+  position: relative;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 50%, transparent 70%);
+}
+
+.nucleus {
+  background: radial-gradient(circle, #ef4444 0%, #dc2626 50%, #991b1b 100%);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.6), inset 0 0 10px rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1;
+  padding: 4px;
+  color: #fff;
+}
+
+.shell {
+  border-color: #60a5fa;
+  border-style: dashed;
+  transition: border-color 0.3s, background-color 0.3s;
+  pointer-events: all;
+  /* disable global rotating animation applied elsewhere */
+  animation: none !important;
+}
+
+.shell:hover {
+  border-color: #3b82f6;
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+.shell.drag-over {
+  border-color: #2563eb;
+  background-color: rgba(37, 99, 235, 0.1);
+  border-style: solid;
+}
+
+.shell-label {
+  font-size: 0.75rem;
+  font-weight: bold;
+  background: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+}
+
+.electron {
+  background: radial-gradient(circle at 30% 30%, #60a5fa 0%, #3b82f6 50%, #2563eb 100%);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: grab;
+  user-select: none;
+}
+
+.electron:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.7);
+}
+
+.electron:active {
+  cursor: grabbing;
+  transform: scale(0.95);
+}
+
+/* Rotator inside each shell - rotates electrons but keeps label stationary */
+.shell-rotator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 50%;
+}
+
+@keyframes rotate-shell-local {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

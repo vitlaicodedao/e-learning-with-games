@@ -1,0 +1,78 @@
+# Node modules
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Local env files
+.env
+.env.*
+backend/.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Dependency directories
+/.pnp
+.pnp.js
+
+# Mac
+*.DS_Store
+
+# Optional npm cache
+.npm
+
+# Yarn
+yarn-error.log
+
+# Tailwind CSS cache
+.tailwindcache
+
+# Backend
+backend/node_modules/
+backend/dist/
+
+# Coverage
+coverage/
+
+# Vite
+/.vite
+
+# Misc
+.tmp
+*.local
+
+# Firebase
+.firebase/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Lock files
+package-lock.json
+pnpm-lock.yaml
+
+# Certificates
+*.pem
+
+# JetBrains
+.idea/
+out/
+
+# Local envs
+local-*.env

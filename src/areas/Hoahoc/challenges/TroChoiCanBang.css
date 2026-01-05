@@ -1,0 +1,187 @@
+.scale-container {
+  position: relative;
+  height: 192px; /* Giảm thêm 20% từ 240px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.scale-base {
+  position: absolute;
+  bottom: 13px; /* Giảm thêm 20% từ 16px */
+  width: 77px; /* Giảm thêm 20% từ 96px */
+  height: 19px; /* Giảm thêm 20% từ 24px */
+  background: linear-gradient(to bottom, #6b7280, #374151);
+  border-radius: 3px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.scale-beam {
+  position: relative;
+  width: 320px; /* Giảm thêm 20% từ 400px */
+  height: 8px; /* Giảm thêm 20% từ 10px */
+  background: linear-gradient(to right, #9ca3af, #6b7280, #9ca3af);
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform-origin: center center;
+  z-index: 2;
+}
+
+.scale-center {
+  position: absolute;
+  top: -5px; /* Giảm thêm 20% từ -6px */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent; /* Giảm thêm 20% từ 10px */
+  border-right: 8px solid transparent;
+  border-top: 10px solid #374151; /* Giảm thêm 20% từ 13px */
+  z-index: 3;
+}
+
+.scale-pan {
+  position: absolute;
+  top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scale-pan.left {
+  left: 6px; /* Giảm thêm 20% từ 8px */
+}
+
+.scale-pan.right {
+  right: 6px;
+}
+
+.scale-chain {
+  width: 2px; /* Giảm thêm 20% từ 3px */
+  height: 38px; /* Giảm thêm 20% từ 48px */
+  background: linear-gradient(to bottom, #9ca3af, #6b7280);
+  border-radius: 1px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.scale-plate {
+  width: 90px; /* Giảm thêm 20% từ 112px */
+  height: 64px; /* Giảm thêm 20% từ 80px */
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  border: 2px solid #9ca3af;
+  border-radius: 5px; /* Giảm từ 6px */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem; /* Giảm từ 0.6rem */
+  transition: all 0.3s;
+}
+
+.scale-plate.balanced {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  border-color: #10b981;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+}
+
+.scale-plate.heavier {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-color: #f59e0b;
+}
+
+.equation-display {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  padding: 1.2rem; /* Giảm thêm 20% từ 1.5rem */
+  border-radius: 0.65rem; /* Giảm từ 0.8rem */
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.species-card {
+  background: white;
+  padding: 0.64rem; /* Giảm thêm 20% từ 0.8rem */
+  border-radius: 0.48rem; /* Giảm từ 0.6rem */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.32rem; /* Giảm thêm 20% từ 0.4rem */
+  min-width: 77px; /* Giảm thêm 20% từ 96px */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.species-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.coeff-control {
+  display: flex;
+  align-items: center;
+  gap: 0.32rem; /* Giảm thêm 20% từ 0.4rem */
+}
+
+.coeff-control button {
+  width: 21px; /* Giảm thêm 20% từ 26px */
+  height: 21px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  font-weight: bold;
+  font-size: 0.8rem; /* Giảm thêm 20% từ 1rem */
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coeff-control button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: scale(1.1);
+}
+
+.coeff-control button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.coeff-control input {
+  width: 32px; /* Giảm thêm 20% từ 40px */
+  height: 23px; /* Giảm thêm 20% từ 29px */
+  text-align: center;
+  font-size: 0.72rem; /* Giảm thêm 20% từ 0.9rem */
+  font-weight: bold;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.24rem;
+  transition: border-color 0.2s;
+}
+
+.coeff-control input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.coeff-control input:disabled {
+  background: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.formula {
+  font-size: 0.96rem; /* Giảm thêm 20% từ 1.2rem */
+  font-weight: bold;
+  color: #1f2937;
+  font-family: 'Courier New', monospace;
+}
+
+.molar-mass {
+  font-size: 0.56rem; /* Giảm thêm 20% từ 0.7rem */
+  color: #6b7280;
+  font-weight: 500;
+}

@@ -1,0 +1,807 @@
+/* src/components/Games/ThermoLab/ThermoLab.css */
+
+/* :root (Giữ nguyên) */
+:root {
+  --bg-color: #f4f7f6;
+  --primary-color: #007aff;
+  --accent-color: #ff9500;
+  --text-color: #1a1a1a;
+  --border-color: #e0e0e0;
+  --hot-color: #e63946;
+  --cold-color: #457b9d;
+  --success-color: #2a9d8f;
+  --fail-color: #d62828;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --border-radius: 12px;
+}
+
+.thermo-lab-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  height: 80vh;
+  min-height: 700px;
+  background: #ffffff;
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  margin: 20px auto;
+}
+
+/* 1. Thanh điều hướng (Giữ nguyên) */
+.module-nav {
+  display: flex;
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 8px 16px;
+  flex-shrink: 0;
+}
+.module-nav-btn {
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  opacity: 0.6;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 3px solid transparent;
+}
+.module-nav-btn.active {
+  opacity: 1;
+  color: var(--primary-color);
+  border-bottom: 3px solid var(--primary-color);
+}
+.module-nav-btn:hover {
+  opacity: 1;
+}
+
+/* 2. Phần thân chính (Lab) */
+.lab-wrapper {
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+  min-height: 500px;
+  /* NÂNG CẤP: Nền phòng thí nghiệm hiện đại */
+  background-color: #e8ecf0;
+  background-image: 
+    linear-gradient(rgba(150, 150, 150, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(150, 150, 150, 0.08) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, rgba(200, 220, 255, 0.1) 0%, transparent 70%);
+  background-size: 20px 20px, 20px 20px, 100% 100%;
+  position: relative;
+}
+/* NÂNG CẤP: Đường viền bàn lab */
+.lab-wrapper::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(0, 122, 255, 0.3) 25%, 
+    rgba(0, 122, 255, 0.5) 50%, 
+    rgba(0, 122, 255, 0.3) 75%, 
+    transparent 100%);
+}
+
+/* NÂNG CẤP: Giao diện "Kính mờ" (Glassmorphism) cho các panel */
+.control-panel,
+.stats-panel {
+  width: 280px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.6); /* Bán trong suốt */
+  backdrop-filter: blur(10px); /* Hiệu ứng mờ */
+  border-right: 1px solid rgba(255, 255, 255, 0.8);
+  color: var(--text-color);
+  flex-shrink: 0;
+}
+.stats-panel {
+  border-left: 1px solid rgba(255, 255, 255, 0.8);
+  border-right: none;
+  width: 250px;
+}
+
+.control-panel h2 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: var(--primary-color);
+}
+.control-panel p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  min-height: 100px;
+}
+.control-section {
+  margin-bottom: 20px;
+}
+.control-section label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+input[type="range"] {
+  /* (Giữ nguyên) */
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(
+    90deg,
+    var(--cold-color) 0%,
+    var(--hot-color) 100%
+  );
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  /* (Giữ nguyên) */
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  border: 2px solid var(--primary-color);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  margin-top: auto; /* Đẩy nút xuống dưới */
+}
+/* NÂNG CẤP: Nút Bắt Đầu Thí Nghiệm */
+.btn-start {
+  background-color: var(--success-color);
+  color: white;
+  margin-top: 10px;
+}
+.btn-start:hover {
+  filter: brightness(1.1);
+}
+.btn-start:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+.btn-reset {
+  background-color: var(--accent-color);
+  color: white;
+}
+.btn-reset:hover {
+  filter: brightness(1.1);
+}
+
+/* 2.2. Khu vực thí nghiệm (Giữa) */
+.lab-area {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+}
+/* NÂNG CẤP: Bàn thí nghiệm 3D */
+.lab-area::before {
+  content: "";
+  position: absolute;
+  bottom: 20%;
+  left: 10%;
+  width: 80%;
+  height: 8px;
+  background: linear-gradient(180deg, rgba(100, 100, 100, 0.3), rgba(50, 50, 50, 0.1));
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+}
+.experiment-zone {
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  max-height: 400px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  z-index: 2;
+}
+
+/* 2.3. Bảng thông số (Giữ nguyên CSS bên trong .stats-panel) */
+.stats-panel h3 {
+  font-size: 16px;
+  margin-top: 0;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+}
+.stat-item {
+  margin-bottom: 16px;
+}
+.stat-item .label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+.stat-item .value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+.stat-item .value.hot {
+  color: var(--hot-color);
+}
+.stat-item .value.cold {
+  color: var(--cold-color);
+}
+.game-status {
+  padding: 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 24px;
+}
+.game-status.pending {
+  background: #e0e0e0;
+  color: #333;
+}
+.game-status.solved {
+  background: var(--success-color);
+  color: white;
+}
+.game-status.failed {
+  background: var(--fail-color);
+  color: white;
+}
+
+/* NÂNG CẤP: Nhật ký Quan sát */
+.observation-log {
+  margin-top: 24px;
+  padding: 16px;
+  background: rgba(240, 248, 255, 0.5);
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-color);
+}
+.observation-log h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: var(--primary-color);
+}
+.log-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+.log-entry {
+  padding: 8px 12px;
+  background: white;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.4;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  animation: slideInRight 0.3s ease-out;
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* NÂNG CẤP: Hộp Gợi ý */
+.hint-box {
+  margin-top: 16px;
+  padding: 14px;
+  background: linear-gradient(135deg, rgba(255, 200, 100, 0.2), rgba(255, 149, 0, 0.1));
+  border-radius: 8px;
+  border: 2px dashed var(--accent-color);
+}
+.hint-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--accent-color);
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+.hint-text {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #555;
+  margin: 0;
+}
+
+/* 3. Kho công cụ (Hiện đại hơn) */
+.tool-inventory {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-top: 2px solid var(--border-color);
+  background: linear-gradient(180deg, #f8f9fa, #ffffff);
+  flex-shrink: 0;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+}
+.tool-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 16px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 3px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 100px;
+  text-align: center;
+  color: var(--text-color);
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+.tool-item:hover {
+  border-color: var(--primary-color);
+  background: linear-gradient(135deg, #f0f8ff, #e6f2ff);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 122, 255, 0.2);
+}
+/* NÂNG CẤP: Tool được chọn */
+.tool-item.selected {
+  border-color: var(--accent-color);
+  background: linear-gradient(135deg, #fff8f0, #ffe8d5);
+  box-shadow: 
+    0 0 0 4px rgba(255, 149, 0, 0.2),
+    0 8px 20px rgba(255, 149, 0, 0.4);
+  transform: translateY(-6px) scale(1.05);
+}
+.tool-item.placed {
+  cursor: not-allowed;
+  opacity: 0.35;
+  background: #f5f5f5;
+  border-color: #ccc;
+  transform: scale(0.95);
+}
+.tool-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+.tool-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* ---------------------------------
+NÂNG CẤP CSS VẬT THỂ (2.5D / 3D)
+---------------------------------
+*/
+
+/* Module 1: Cây cầu (3D Kim loại chuyên nghiệp) */
+.bridge-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: rotateX(25deg) scale(0.9);
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
+}
+.bridge-support {
+  width: 110%;
+  display: flex;
+  justify-content: space-between;
+}
+.support-pillar {
+  width: 30px;
+  height: 80px;
+  background: linear-gradient(135deg, #6a7c92 0%, #4a5c72 50%, #2a3c52 100%);
+  border: 2px solid #3a4c62;
+  border-radius: 4px;
+  box-shadow: 
+    inset 0 2px 8px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.5),
+    0 8px 16px rgba(0, 0, 0, 0.4);
+  position: relative;
+  transition: all 0.3s ease;
+}
+/* NÂNG CẤP: Hiệu ứng kim loại bóng */
+.support-pillar::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 5px;
+  height: 70%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent);
+  border-radius: 2px;
+}
+/* NÂNG CẤP: Vùng tương tác 3D nổi bật */
+.support-hotspot {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 122, 255, 0.8), rgba(0, 122, 255, 0.2));
+  border: 3px dashed var(--primary-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: pulse 2s ease-in-out infinite;
+}
+.support-hotspot:hover {
+  background: radial-gradient(circle, rgba(0, 122, 255, 1), rgba(0, 122, 255, 0.4));
+  transform: translateX(-50%) scale(1.15);
+  box-shadow: 0 0 25px rgba(0, 122, 255, 0.8);
+}
+.support-hotspot.hidden {
+  display: none;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+  50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+}
+/* NÂNG CẤP: Trụ + Con lăn 3D */
+.support-pillar.has-roller {
+  background: linear-gradient(135deg, #c0c8d0 0%, #a0a8b0 50%, #808890 100%);
+}
+.support-pillar.has-roller::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: 
+    radial-gradient(circle at 30% 30%, #e0e0e0, #888),
+    conic-gradient(from 0deg, #aaa 0deg, #666 90deg, #aaa 180deg, #666 270deg);
+  border-radius: 50%;
+  border: 3px solid #555;
+  box-shadow: 
+    inset 0 -3px 8px rgba(0, 0, 0, 0.5),
+    0 8px 15px rgba(0, 0, 0, 0.4);
+  animation: spin 3s linear infinite;
+}
+@keyframes spin {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to { transform: translateX(-50%) rotate(360deg); }
+}
+.bridge {
+  height: 35px;
+  background: 
+    linear-gradient(180deg, #b8c5d4 0%, #8d99ae 50%, #6a7c92 100%),
+    repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(255,255,255,0.1) 10px, rgba(255,255,255,0.1) 11px);
+  border-radius: 6px;
+  border-top: 2px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.3),
+    0 10px 25px rgba(0, 0, 0, 0.3);
+  margin-top: -30px;
+  position: relative;
+  z-index: 2;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+/* NÂNG CẤP: Hiệu ứng rãnh kim loại */
+.bridge::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  width: 90%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.2) 20%, rgba(0,0,0,0.2) 80%, transparent);
+  transform: translateY(-50%);
+}
+.bridge.bent {
+  transform: rotateX(-15deg) scaleY(1.15) translateY(-12px);
+  background: linear-gradient(180deg, #e8a0a5 0%, #e63946 50%, #c32f3a 100%);
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 100, 100, 0.4),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.5),
+    0 15px 35px rgba(230, 57, 70, 0.5);
+  animation: shake 0.3s ease-in-out;
+}
+
+/* Module 2: Bể cá (Hiệu ứng kính chuyên nghiệp) */
+.fishtank-container {
+  width: 180px;
+  height: 280px;
+  border: 10px solid rgba(173, 216, 230, 0.4);
+  border-radius: 16px 16px 8px 8px;
+  background: 
+    linear-gradient(135deg, rgba(224, 240, 255, 0.9) 0%, rgba(200, 230, 255, 0.8) 100%);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    inset 0 0 30px rgba(100, 180, 255, 0.2),
+    0 15px 40px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+}
+/* NÂNG CẤP: Phản chiếu ánh sáng 3D */
+.fishtank-container::before {
+  content: "";
+  position: absolute;
+  top: -5%;
+  left: 15%;
+  width: 50px;
+  height: 110%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: rotate(15deg);
+  pointer-events: none;
+  z-index: 5;
+}
+/* NÂNG CẤP: Hiệu ứng khúc xạ thủy tinh */
+.fishtank-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 10%;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: rotate(-20deg);
+  pointer-events: none;
+  z-index: 5;
+}
+.water-level {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(180deg, rgba(100, 180, 255, 0.6), rgba(30, 144, 255, 0.8));
+  border-top: 2px solid rgba(255, 255, 255, 0.4);
+  transition: height 0.3s linear, background-color 0.3s linear;
+  box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+/* NÂNG CẤP: Hiệu ứng nước nóng (hơi nước) */
+.water-level.hot {
+  background: linear-gradient(180deg, rgba(255, 120, 120, 0.6), rgba(217, 90, 90, 0.8));
+  animation: boil 1s ease-in-out infinite;
+}
+@keyframes boil {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; box-shadow: inset 0 10px 20px rgba(255, 0, 0, 0.2); }
+}
+.water-level.broken {
+  animation: shake 0.5s;
+}
+.fish {
+  font-size: 35px;
+  position: absolute;
+  left: 40%;
+  bottom: 30%;
+  transform: translateX(-50%);
+  animation: swim 4s ease-in-out infinite;
+  z-index: 2;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+/* NÂNG CẤP: Ống tràn kim loại 3D */
+.overflow-pipe {
+  position: absolute;
+  top: 15%;
+  right: -30px;
+  width: 50px;
+  height: 25px;
+  background: linear-gradient(135deg, #aaa, #777, #555);
+  border: 2px solid #444;
+  border-radius: 12px 0 0 12px;
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.5),
+    0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+  animation: slideIn 0.5s ease-out;
+}
+/* NÂNG CẤP: Vòng ren ống */
+.overflow-pipe::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 70%;
+  height: 3px;
+  background: repeating-linear-gradient(90deg, #333 0px, #333 3px, transparent 3px, transparent 5px);
+}
+@keyframes slideIn {
+  from { right: -60px; opacity: 0; }
+  to { right: -30px; opacity: 1; }
+}
+/* NÂNG CẤP: Vùng tương tác ống tràn */
+.pipe-hotspot {
+  position: absolute;
+  top: 15%;
+  right: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 149, 0, 0.8), rgba(255, 149, 0, 0.2));
+  border: 3px dashed var(--accent-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 4;
+  animation: pulse 2s ease-in-out infinite;
+}
+.pipe-hotspot:hover {
+  background: radial-gradient(circle, rgba(255, 149, 0, 1), rgba(255, 149, 0, 0.4));
+  transform: scale(1.15);
+  box-shadow: 0 0 25px rgba(255, 149, 0, 0.8);
+}
+.pipe-hotspot.hidden {
+  display: none;
+}
+
+/* Module 3: Khinh khí cầu (Thiết kế chuyên nghiệp 3D) */
+.balloon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 140px;
+}
+/* NÂNG CẤP: Bình cầu thủy tinh Erlenmeyer */
+.flask {
+  width: 120px;
+  height: 120px;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(200, 220, 240, 0.8), rgba(160, 196, 232, 0.6)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent);
+  border: 4px solid rgba(160, 196, 232, 0.9);
+  border-radius: 50% 50% 15px 15px;
+  position: relative;
+  box-shadow: 
+    inset 0 0 20px rgba(255, 255, 255, 0.3),
+    inset 0 -5px 15px rgba(0, 0, 0, 0.1),
+    0 15px 30px rgba(0, 0, 0, 0.2);
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+}
+/* Phản chiếu ánh sáng thủy tinh */
+.flask::before {
+  content: "";
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 35px;
+  background: 
+    linear-gradient(180deg, rgba(200, 220, 240, 0.8), rgba(160, 196, 232, 0.6));
+  border: 4px solid rgba(160, 196, 232, 0.9);
+  border-bottom: none;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.3);
+}
+/* NÂNG CẤP: Đèn cồn 3D chân thực */
+.flask::after {
+  content: "";
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 45px;
+  background: 
+    radial-gradient(ellipse at center, rgba(255, 100, 0, 0) 0%, rgba(255, 100, 0, 0.3) 30%, rgba(255, 50, 0, 0.6) 60%, rgba(200, 0, 0, 0.8) 100%);
+  border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
+  opacity: 0;
+  filter: blur(3px);
+  transition: all 0.3s ease;
+  animation: none;
+}
+.flask.heating::after {
+  opacity: 1;
+  animation: flicker 0.15s ease-in-out infinite, grow 2s ease-in-out infinite;
+  transform: translateX(-50%) scale(var(--heat-intensity, 1));
+}
+@keyframes flicker {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 1; }
+}
+@keyframes grow {
+  0%, 100% { transform: translateX(-50%) scale(var(--heat-intensity, 1)) translateY(0); }
+  50% { transform: translateX(-50%) scale(calc(var(--heat-intensity, 1) * 1.1)) translateY(-3px); }
+}
+
+/* NÂNG CẤP: Bong bóng cao su 3D */
+.balloon {
+  width: 60px;
+  height: 75px;
+  background: 
+    radial-gradient(circle at 35% 35%, rgba(255, 200, 150, 0.9), var(--accent-color)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 50%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  margin-left: -30px;
+  transform-origin: bottom center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(0.1);
+  box-shadow: 
+    inset -8px -8px 15px rgba(0, 0, 0, 0.3),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.4),
+    0 10px 25px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 180, 100, 0.5);
+}
+/* Điểm phản chiếu cao su */
+.balloon::before {
+  content: "";
+  position: absolute;
+  top: 15%;
+  left: 25%;
+  width: 20px;
+  height: 25px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6), transparent);
+  border-radius: 50%;
+}
+.balloon.inflated {
+  transform: scale(1.8) translateY(-100px);
+  animation: float 3s ease-in-out infinite;
+  box-shadow: 
+    inset -10px -10px 20px rgba(0, 0, 0, 0.3),
+    inset 8px 8px 15px rgba(255, 255, 255, 0.5),
+    0 20px 40px rgba(0, 0, 0, 0.3);
+}
+.balloon.exploded {
+  background: transparent;
+  border: none;
+  box-shadow: 
+    0 0 80px 50px rgba(230, 57, 70, 0.6),
+    0 0 120px 80px rgba(255, 100, 0, 0.3);
+  border-radius: 50%;
+  transform: scale(2.5);
+  opacity: 0;
+  transition: all 0.2s ease-out;
+}
+
+@keyframes float {
+  0%, 100% { transform: scale(1.8) translateY(-100px); }
+  50% { transform: scale(1.8) translateY(-110px); }
+}
+
+@keyframes swim {
+  /* (Giữ nguyên) */
+  0% { transform: translateX(0px) scaleX(1); }
+  45% { transform: translateX(50px) scaleX(1); }
+  50% { transform: translateX(50px) scaleX(-1); }
+  95% { transform: translateX(0px) scaleX(-1); }
+  100% { transform: translateX(0px) scaleX(1); }
+}
+@keyframes shake {
+  /* (Giữ nguyên) */
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+}

@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/* Apply globally */
+html, body, #root {
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.card {
+  background: var(--card);
+  backdrop-filter: blur(10px);
+}
+
+/* ============================
+   Tailwind + UI Components
+   ============================ */
+@layer base {
+  body {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .card {
+    @apply rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-lg;
+    background: var(--card);
+    color: var(--text);
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 border rounded-lg transition-all;
+    background: var(--card);
+    color: var(--text);
+  }
+}
+
+@layer utilities {
+  /* animation utilities ... giữ nguyên */
+}
+
+/* keyframes ... giữ nguyên */
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Global transition */
+* {
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}

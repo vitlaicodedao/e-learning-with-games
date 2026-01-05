@@ -1,0 +1,910 @@
+/* Cấu Trúc Nguyên Tử */
+.cau-truc-nguyen-tu-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  padding: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background: #e0e0e0;
+  transform: translateX(-5px);
+}
+
+.game-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.title-icon {
+  color: #2a5298;
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.score-display {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  border-radius: 50px;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.game-content {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.progress-section {
+  background: white;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.challenge-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.difficulty-badge {
+  padding: 4px 12px;
+  color: white;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.difficulty-badge.easy {
+  background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%);
+}
+
+.difficulty-badge.medium {
+  background: linear-gradient(135deg, #ff9800 0%, #ffc107 100%);
+}
+
+.difficulty-badge.hard {
+  background: linear-gradient(135deg, #f44336 0%, #e91e63 100%);
+}
+
+.challenge-counter {
+  font-weight: 600;
+  color: #666;
+  font-size: 13px;
+}
+
+.points-badge {
+  padding: 4px 12px;
+  background: #4caf50;
+  color: white;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #2a5298;
+  transition: width 0.5s ease;
+  border-radius: 10px;
+}
+
+/* Challenge Title */
+.challenge-title {
+  background: white;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.challenge-title h2 {
+  margin: 0 0 6px 0;
+  color: #333;
+  font-size: 20px;
+}
+
+.challenge-title p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.isotope-note {
+  margin-top: 8px;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-radius: 8px;
+  border-left: 3px solid #2196f3;
+  font-size: 12px;
+  color: #333;
+  text-align: left;
+}
+
+/* Two Column Layout */
+.two-column-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Atom Visualization Compact */
+.visualization-section-compact {
+  background: white;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.atom-visualization {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Particle Summary Compact */
+.particle-summary-compact {
+  background: white;
+  padding: 10px 12px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+/* Input Section Compact */
+.input-section-compact {
+  background: white;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  height: auto;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+.input-section-compact h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 15px;
+}
+
+/* Old styles for backward compatibility */
+.visualization-section {
+  background: white;
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: center;
+}
+
+/* Nucleus */
+.nucleus {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, #ffeb3b 0%, #ffc107 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.6);
+  z-index: 10;
+  border: 2px solid #ff9800;
+  overflow: hidden;
+}
+
+.nucleus-label {
+  position: absolute;
+  top: -22px;
+  font-size: 9px;
+  font-weight: 700;
+  color: #333;
+  background: white;
+  padding: 2px 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.particle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6px;
+  font-weight: 700;
+  color: white;
+  cursor: help;
+  transition: transform 0.2s ease;
+}
+
+.particle:hover {
+  transform: scale(1.2);
+  z-index: 2;
+}
+
+.proton {
+  background: linear-gradient(135deg, #f44336 0%, #e91e63 100%);
+  box-shadow: 0 2px 4px rgba(244, 67, 54, 0.4);
+}
+
+.neutron {
+  background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+  box-shadow: 0 2px 4px rgba(158, 158, 158, 0.4);
+}
+
+.particle-count {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: 700;
+  color: #333;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.proton-count {
+  bottom: 15px;
+  color: #f44336;
+}
+
+.neutron-count {
+  bottom: 0px;
+  color: #757575;
+}
+
+/* Electron Shells */
+.electron-shells {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.shell {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px dashed #2196f3;
+  border-radius: 50%;
+  animation: rotate-shell 20s linear infinite;
+}
+
+.shell-1 {
+  animation-duration: 10s;
+}
+
+.shell-2 {
+  animation-duration: 15s;
+}
+
+.shell-3 {
+  animation-duration: 20s;
+}
+
+.shell-4 {
+  animation-duration: 25s;
+}
+
+@keyframes rotate-shell {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.electron {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+  border-radius: 50%;
+  margin-left: -5px;
+  margin-top: -5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+  font-weight: 700;
+  color: white;
+  box-shadow: 0 0 6px rgba(33, 150, 243, 0.8);
+  cursor: help;
+  /* Orbit uses CSS variables set from React and runs alongside glow animation */
+  transform-origin: 50% 50%;
+  animation: orbit var(--duration, 10s) linear infinite var(--delay, 0s), electron-glow 2s infinite alternate;
+}
+
+@keyframes orbit {
+  from {
+    transform: rotate(var(--angle)) translateX(var(--radius));
+  }
+  to {
+    transform: rotate(calc(var(--angle) + 360deg)) translateX(var(--radius));
+  }
+}
+
+@keyframes electron-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(33, 150, 243, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(33, 150, 243, 1);
+  }
+}
+
+/* Element Info Display */
+.element-info-display {
+  position: absolute;
+  bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.element-symbol {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e3c72;
+}
+
+.element-notation {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+}
+
+.element-notation sup {
+  font-size: 11px;
+  vertical-align: super;
+}
+
+/* Particle Summary */
+.particle-summary {
+  background: white;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 8px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 8px;
+  border: 2px solid #dee2e6;
+}
+
+.summary-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+}
+
+.proton-icon {
+  background: linear-gradient(135deg, #f44336 0%, #e91e63 100%);
+  box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3);
+}
+
+.neutron-icon {
+  background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+  box-shadow: 0 2px 8px rgba(158, 158, 158, 0.3);
+}
+
+.electron-icon {
+  background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+}
+
+.summary-label {
+  font-weight: 600;
+  color: #495057;
+  font-size: 11px;
+}
+
+.summary-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e3c72;
+}
+
+/* Input Section */
+.input-section {
+  background: white;
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.input-section h3 {
+  margin: 0 0 12px 0;
+  color: #333;
+  font-size: 16px;
+}
+
+.input-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group label {
+  font-weight: 600;
+  color: #495057;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.particle-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
+}
+
+.proton-badge {
+  background: linear-gradient(135deg, #f44336 0%, #e91e63 100%);
+}
+
+.neutron-badge {
+  background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+}
+
+.electron-badge {
+  background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+}
+
+.input-group input {
+  padding: 8px 12px;
+  border: 2px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #2a5298;
+  box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+}
+
+.input-group input.correct {
+  background: #d4edda;
+  border-color: #28a745;
+}
+
+.input-group input.incorrect {
+  background: #f8d7da;
+  border-color: #dc3545;
+}
+
+/* Formulas Section */
+.formulas-section {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border-left: 3px solid #2196f3;
+}
+
+.formulas-section h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 14px;
+}
+
+.formula-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.formula-item {
+  background: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #333;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.formula-item strong {
+  color: #1e3c72;
+}
+
+/* Hint Section */
+.hint-section {
+  background: linear-gradient(135deg, #fff9e6 0%, #ffe4e1 100%);
+  padding: 10px 12px;
+  border-radius: 6px;
+  border-left: 3px solid #ff9800;
+  margin-bottom: 12px;
+  color: #333;
+  font-size: 12px;
+}
+
+/* Answer Feedback */
+.answer-feedback {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 3px solid #28a745;
+}
+
+.answer-feedback h4 {
+  margin: 0 0 10px 0;
+  color: #155724;
+  font-size: 14px;
+}
+
+.correct-answers {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.correct-answers p {
+  margin: 0;
+  font-size: 13px;
+  color: #155724;
+}
+
+.correct-answers strong {
+  font-size: 14px;
+  color: #0d3d1d;
+}
+
+/* Buttons */
+.button-section {
+  display: flex;
+  justify-content: center;
+}
+
+.submit-btn {
+  padding: 10px 32px;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 12px rgba(30, 60, 114, 0.3);
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 16px rgba(30, 60, 114, 0.4);
+}
+
+.submit-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.navigation-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-nav {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-prev {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-prev:hover:not(:disabled) {
+  background: #5a6268;
+  transform: translateX(-3px);
+}
+
+.btn-next {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+}
+
+.btn-next:hover:not(:disabled) {
+  transform: translateX(3px);
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.btn-nav:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Results Modal */
+.results-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.results-modal {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  animation: slideUp 0.3s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.results-modal h2 {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-size: 28px;
+}
+
+.trophy-icon {
+  margin-bottom: 20px;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.final-score {
+  font-size: 36px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 20px 0;
+}
+
+.results-summary {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.results-summary p {
+  margin: 10px 0;
+  color: #555;
+  font-size: 16px;
+}
+
+.btn-return {
+  width: 100%;
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-return:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .two-column-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .input-grid,
+  .formula-list {
+    grid-template-columns: 1fr;
+  }
+
+  .particle-summary,
+  .particle-summary-compact {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .cau-truc-nguyen-tu-container {
+    padding: 8px;
+  }
+
+  .game-header {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 15px;
+  }
+
+  .game-title {
+    font-size: 18px;
+  }
+
+  .two-column-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .atom-visualization {
+    width: 250px;
+    height: 250px;
+  }
+
+  .nucleus {
+    width: 50px;
+    height: 50px;
+  }
+
+  .visualization-section,
+  .visualization-section-compact {
+    padding: 12px;
+  }
+}

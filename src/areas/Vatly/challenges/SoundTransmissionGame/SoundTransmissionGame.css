@@ -1,0 +1,279 @@
+.sound-transmission-game {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1a2238 0%, #2a3a5e 100%);
+  color: white;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.st-game-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.st-back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.st-back-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(-5px);
+}
+
+.st-game-header h1 {
+  font-size: 2rem;
+  color: #ffeb3b;
+  text-shadow: 0 0 10px #ffeb3b;
+}
+
+.st-main-content {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 20px;
+  grid-template-areas:
+    "controls sim"
+    "results  sim";
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.st-controls {
+  grid-area: controls;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.st-controls h2 {
+  font-size: 1.3rem;
+  color: #00bcd4;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.st-medium-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.st-medium-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.st-medium-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #00bcd4;
+}
+
+.st-medium-btn.selected {
+  background: rgba(0, 188, 212, 0.3);
+  border-color: #00bcd4;
+  font-weight: bold;
+}
+
+.st-medium-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.st-action-button, .st-reset-button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.st-action-button {
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+  color: white;
+  margin-bottom: 10px;
+}
+
+.st-action-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(17, 153, 142, 0.3);
+}
+
+.st-action-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.st-reset-button {
+  background: rgba(255, 82, 82, 0.7);
+  color: white;
+}
+
+.st-reset-button:hover:not(:disabled) {
+  background: rgba(255, 82, 82, 1);
+}
+
+.st-simulation-area {
+  grid-area: sim;
+  background: #1a2238;
+  border: 2px solid #00bcd4;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.st-simulation-area canvas {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.st-results-panel {
+  grid-area: results;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.st-results-panel h2 {
+  font-size: 1.3rem;
+  color: #00bcd4;
+  margin-bottom: 20px;
+}
+
+.st-no-result {
+  color: #aaa;
+  font-style: italic;
+}
+
+.st-result-data p {
+  margin: 10px 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.st-result-data strong {
+  color: #ffeb3b;
+  font-size: 1.1rem;
+}
+
+/* Tutorial Overlay */
+.st-tutorial-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: st-fadeIn 0.5s ease;
+}
+
+.st-tutorial-content {
+  background: linear-gradient(135deg, #2a3a5e 0%, #1a2238 100%);
+  padding: 50px;
+  border-radius: 20px;
+  max-width: 700px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 2px solid #00bcd4;
+}
+
+.st-tutorial-icon {
+  margin-bottom: 20px;
+  color: #ffeb3b;
+}
+
+.st-tutorial-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.st-tutorial-text {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.st-tutorial-text h3 {
+  margin-top: 25px;
+  margin-bottom: 15px;
+  color: #00bcd4;
+}
+
+.st-tutorial-text ul {
+  list-style: none;
+  padding: 0;
+}
+
+.st-tutorial-text li {
+  padding: 10px 0;
+  font-size: 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.st-physics-note {
+  margin-top: 25px;
+  padding: 20px;
+  background: rgba(255, 235, 59, 0.1);
+  border-radius: 10px;
+  border-left: 4px solid #ffeb3b;
+}
+
+.st-physics-note p {
+  margin: 8px 0;
+}
+
+.st-start-button {
+  padding: 15px 40px;
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.st-start-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(17, 153, 142, 0.4);
+}
+
+@keyframes st-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

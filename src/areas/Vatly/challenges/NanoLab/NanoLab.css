@@ -1,0 +1,381 @@
+/* NanoLab.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+:root {
+  --bg-dark: #1a1a2e;        /* Nền lab (Xanh navy đậm) */
+  --bg-light: #2a2a3e;       /* Nền phụ (Xám-Xanh) */
+  --text-light: #e0e0e0;     /* Chữ chính (Trắng xám) */
+  --text-secondary: #a0a0b0; /* Chữ phụ */
+  --accent-cyan: #00e5ff;     /* Neon Cyan (Găng tay, UI) */
+  --accent-orange: #ff9f1c;  /* Neon Cam (Vật thể tương tác) */
+  --accent-green: #00ff7f;   /* Neon Xanh lá (Thành công) */
+  --accent-red: #ff4d4d;     /* Neon Đỏ (Cảnh báo) */
+}
+
+.nano-lab-container {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;
+  border-radius: 10px;
+  border: 2px solid var(--accent-cyan);
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+/* --- Header & Score --- */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  background-color: var(--bg-light);
+  border-bottom: 1px solid var(--accent-cyan);
+}
+
+.game-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+.score-display {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent-green);
+}
+
+/* --- Game Body Layout --- */
+.game-body {
+  display: flex;
+}
+
+/* --- Tool Bar (Găng tay) --- */
+.tool-bar {
+  width: 200px;
+  background-color: var(--bg-light);
+  padding: 20px;
+  border-right: 1px solid var(--accent-cyan);
+  display: flex;
+  flex-direction: column;
+}
+
+.tool-bar h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: var(--text-light);
+  font-weight: 700;
+  border-bottom: 1px dashed var(--text-secondary);
+  padding-bottom: 10px;
+}
+
+.tool-btn {
+  background: none;
+  border: 2px solid var(--text-secondary);
+  color: var(--text-secondary);
+  padding: 12px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.tool-btn:hover:not(:disabled) {
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
+  box-shadow: 0 0 10px rgba(255, 159, 28, 0.5);
+}
+
+.tool-btn.active {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  background-color: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.tool-btn:disabled,
+.tool-btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  color: var(--text-secondary);
+  border-color: var(--text-secondary);
+  box-shadow: none;
+}
+
+/* --- Game Viewport (Màn hình chơi) --- */
+.game-viewport {
+  flex-grow: 1;
+  padding: 20px;
+  min-height: 400px;
+}
+
+.game-viewport h2 {
+  margin-top: 0;
+  color: var(--text-light);
+}
+
+.message-bar {
+  padding: 10px;
+  background-color: rgba(0, 255, 255, 0.1);
+  border: 1px solid var(--accent-cyan);
+  color: var(--accent-cyan);
+  border-radius: 5px;
+  margin-bottom: 20px;
+  min-height: 2.5em;
+  display: flex;
+  align-items: center;
+}
+
+.level-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+}
+
+/* --- Level 1: Measurement --- */
+.level-content p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.lab-area {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  min-height: 250px;
+  background-color: var(--bg-light);
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.item-shelf, .sensor-pad-wrapper {
+  width: 40%;
+  text-align: center;
+}
+
+.item-shelf h4, .sensor-pad-wrapper h4 {
+  color: var(--text-secondary);
+  margin-top: 0;
+}
+
+.item-shelf-content {
+  border: 2px dashed var(--text-secondary);
+  min-height: 150px;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.sensor-pad {
+  border: 2px solid var(--accent-orange);
+  min-height: 150px;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transition: border-color 0.3s ease;
+}
+
+.sensor-pad.active {
+  border-color: var(--accent-green);
+  box-shadow: 0 0 15px rgba(0, 255, 127, 0.5);
+}
+
+.sensor-display {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-orange);
+  transition: color 0.3s ease;
+}
+
+.sensor-pad.active .sensor-display {
+  color: var(--accent-green);
+}
+
+.sensor-items {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-box {
+  background-color: var(--accent-orange);
+  color: var(--bg-dark);
+  font-weight: 700;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.item-box:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px var(--accent-orange);
+}
+
+.door {
+  width: 80px;
+  height: 150px;
+  background-color: var(--accent-red);
+  color: var(--bg-dark);
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.5s ease;
+}
+
+.door.open {
+  background-color: var(--accent-green);
+}
+
+.next-level-btn {
+  background-color: var(--accent-green);
+  color: var(--bg-dark);
+  font-weight: 700;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  display: block;
+  float: right;
+  transition: transform 0.2s ease;
+}
+
+.next-level-btn:hover {
+  transform: scale(1.05);
+}
+
+/* --- NỐI VÀO CUỐI FILE NanoLab.css --- */
+
+/* --- Level 2: Lực (Force) --- */
+.lab-area-force {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  min-height: 250px;
+  background-color: var(--bg-light);
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.force-target {
+  width: 100px;
+  height: 100px;
+  background-color: var(--accent-red);
+  border: 4px solid var(--text-secondary);
+  border-radius: 50%; /* Hình tròn */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  color: var(--bg-dark);
+  transition: all 0.3s ease;
+}
+
+.force-target.hit {
+  background-color: var(--accent-green);
+  border-color: var(--accent-green);
+  box-shadow: 0 0 20px var(--accent-green);
+}
+
+.force-box {
+  width: 60px;
+  height: 60px;
+  background-color: var(--accent-orange);
+  color: var(--bg-dark);
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+  transition: transform 1s ease-out; /* Animation 1 giây */
+}
+
+.force-box.launched {
+  /* Di chuyển lên trên (vào mục tiêu) */
+  transform: translateY(-130px) scale(0.8);
+}
+
+/* --- Level 3: Nhiệt (Thermal) --- */
+.lab-area-thermal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 250px;
+  background-color: var(--bg-light);
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.thermal-bar {
+  width: 40px;
+  height: 180px;
+  background-color: var(--text-secondary);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--bg-dark);
+  font-weight: 700;
+  text-align: center;
+}
+
+.thermal-bar.shrunk {
+  /* Co lại (scale Y) */
+  transform: scaleY(0.5);
+  background-color: var(--accent-cyan);
+  box-shadow: 0 0 15px var(--accent-cyan);
+}
+
+.thermal-key {
+  font-size: 5rem; /* Kích thước chìa khóa 🔑 */
+  cursor: not-allowed;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.thermal-key.clickable {
+  cursor: pointer;
+  opacity: 1;
+  transform: scale(1.1); /* Nhấp nháy nhẹ khi có thể lấy */
+}
+
+.thermal-key.collected {
+  /* Biến mất */
+  opacity: 0;
+  transform: scale(0);
+}

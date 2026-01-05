@@ -1,0 +1,383 @@
+/* StaticElectricity.css */
+/* Thiết kế 100% theo PhET Colorado Balloons and Static Electricity */
+
+/* Main game container */
+.static-electricity-game {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #E3F2FD 0%, #BBDEFB 100%);
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Controls bar */
+.controls {
+  display: flex;
+  gap: 20px;
+  padding: 18px 25px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  z-index: 100;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+}
+
+.checkbox-label input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.btn-reset, .btn-reset-all {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn-reset {
+  background: #2196F3;
+  color: white;
+}
+
+.btn-reset:hover {
+  background: #1976D2;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(33, 150, 243, 0.4);
+}
+
+.btn-reset-all {
+  background: #F44336;
+  color: white;
+}
+
+.btn-reset-all:hover {
+  background: #D32F2F;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(244, 67, 54, 0.4);
+}
+
+/* Play area - room simulation */
+.play-area {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  background: linear-gradient(180deg, 
+    rgba(227, 242, 253, 0.6) 0%, 
+    rgba(187, 222, 251, 0.4) 100%);
+  overflow: hidden;
+}
+
+/* Charge particles */
+.charge {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  z-index: 10;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.charge.moving {
+  animation: chargeAppear 0.5s ease-out;
+}
+
+@keyframes chargeAppear {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.charge.negative svg circle {
+  filter: drop-shadow(0 0 3px rgba(33, 150, 243, 0.6));
+}
+
+.charge.positive svg circle {
+  filter: drop-shadow(0 0 3px rgba(244, 67, 54, 0.6));
+}
+
+/* Yellow Balloon */
+.yellow-balloon {
+  position: absolute;
+  width: 120px;
+  height: 140px;
+  cursor: grab;
+  z-index: 30;
+  transition: filter 0.2s;
+}
+
+.yellow-balloon:hover {
+  filter: brightness(1.05);
+}
+
+.yellow-balloon.dragging {
+  cursor: grabbing;
+  z-index: 40;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+}
+
+.balloon-svg {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.balloon-charges {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.charge-display {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #2196F3, #1565C0);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 15px;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.4);
+  min-width: 40px;
+  text-align: center;
+}
+
+.charge-display.positive {
+  background: linear-gradient(135deg, #F44336, #C62828);
+  box-shadow: 0 2px 8px rgba(244, 67, 54, 0.4);
+}
+
+.charge-display.negative {
+  background: linear-gradient(135deg, #2196F3, #1565C0);
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.4);
+}
+
+.charge-display.neutral {
+  background: linear-gradient(135deg, #9E9E9E, #616161);
+  box-shadow: 0 2px 8px rgba(158, 158, 158, 0.4);
+  font-size: 13px;
+}
+
+/* Sweater */
+.sweater {
+  position: absolute;
+  left: 50px;
+  top: 150px;
+  width: 220px;
+  height: 280px;
+  z-index: 20;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+}
+
+.sweater.rubbing {
+  animation: sweaterShake 0.1s ease-in-out infinite;
+}
+
+@keyframes sweaterShake {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-1px, 0); }
+  50% { transform: translate(1px, 0); }
+  75% { transform: translate(0, -1px); }
+}
+
+.sweater-charges {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Wall */
+.wall {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 140px;
+  height: 100%;
+  z-index: 20;
+  filter: drop-shadow(-2px 0 8px rgba(0, 0, 0, 0.15));
+}
+
+.wall-charges {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Labels */
+.item-label {
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(139, 69, 19, 0.9);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+}
+
+.wall-label {
+  top: 20px;
+  bottom: auto;
+  background: rgba(205, 133, 63, 0.9);
+}
+
+/* Objectives panel */
+.objectives {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 20px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  min-width: 420px;
+  z-index: 100;
+}
+
+.objectives h3 {
+  margin: 0 0 16px 0;
+  color: #1976D2;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.objective {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: #F5F5F5;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.objective:hover {
+  background: #E3F2FD;
+}
+
+.objective.done {
+  background: linear-gradient(135deg, #C8E6C9, #A5D6A7);
+  animation: completePulse 0.4s ease-out;
+}
+
+@keyframes completePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.objective input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: default;
+}
+
+.objective span {
+  flex: 1;
+  font-size: 15px;
+  color: #333;
+  font-weight: 500;
+}
+
+.objective .pts {
+  color: #4CAF50;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.score {
+  margin-top: 16px;
+  padding: 12px;
+  background: linear-gradient(135deg, #FF9800, #F57C00);
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  box-shadow: 0 3px 12px rgba(245, 124, 0, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .sweater {
+    left: 30px;
+    transform: scale(0.9);
+  }
+  
+  .objectives {
+    min-width: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  .controls {
+    flex-wrap: wrap;
+    padding: 12px 18px;
+  }
+  
+  .yellow-balloon {
+    transform: scale(0.85);
+  }
+  
+  .sweater {
+    transform: scale(0.75);
+    left: 20px;
+  }
+  
+  .wall {
+    width: 100px;
+  }
+  
+  .objectives {
+    min-width: 320px;
+    padding: 16px 20px;
+    bottom: 15px;
+  }
+}
+
+/* Smooth animations */
+* {
+  box-sizing: border-box;
+}
+
+.play-area > * {
+  transition: opacity 0.3s ease-out;
+}

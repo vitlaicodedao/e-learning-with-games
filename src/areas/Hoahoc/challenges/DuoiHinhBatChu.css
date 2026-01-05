@@ -1,0 +1,21 @@
+/* Đoán Hình Bắt Chữ Hóa Học - Modern Styles */
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 2s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .animate-bounce {
+    font-size: 4rem;
+  }
+}

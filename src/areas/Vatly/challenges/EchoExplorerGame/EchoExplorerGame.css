@@ -1,0 +1,295 @@
+.echo-explorer-game {
+  min-height: 100vh;
+  background: #2c3e50;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ee-header {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.ee-back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ee-back-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.ee-score {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f1c40f;
+}
+
+.ee-main {
+  width: 100%;
+  max-width: 1000px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+}
+
+.ee-level-info h2 {
+  font-size: 1.8rem;
+  color: #3498db;
+  margin-bottom: 10px;
+}
+
+.ee-level-info p {
+  font-size: 1.1rem;
+  color: #bdc3c7;
+  margin-bottom: 20px;
+}
+
+.ee-simulation {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.ee-simulation canvas {
+  background: #233142;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.ee-timer-display {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2ecc71;
+}
+
+.ee-controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.ee-shout-button, .ee-stop-button {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ee-shout-button {
+  background: #3498db;
+  color: white;
+}
+
+.ee-stop-button {
+  background: #e74c3c;
+  color: white;
+}
+
+.ee-shout-button:disabled, .ee-stop-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ee-calculation {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.ee-formula {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #ecf0f1;
+}
+
+.ee-formula strong {
+  color: #2ecc71;
+}
+
+.ee-answer-box {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.ee-answer-box input {
+  width: 300px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #34495e;
+  background: #2c3e50;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.ee-answer-box button {
+  padding: 12px 25px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.ee-answer-box button:hover {
+  background: #2ecc71;
+}
+
+.ee-result-message {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  background: rgba(46, 204, 113, 0.2);
+  border: 1px solid #2ecc71;
+  color: #2ecc71;
+}
+
+.ee-next-level-button {
+  margin-top: 20px;
+  padding: 15px 40px;
+  background: #f1c40f;
+  color: #2c3e50;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.ee-next-level-button:hover {
+  background: #f39c12;
+  transform: translateY(-2px);
+}
+
+/* Tutorial & Game Over */
+.ee-tutorial-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.ee-tutorial-content {
+  background: #34495e;
+  padding: 40px;
+  border-radius: 15px;
+  max-width: 600px;
+  text-align: center;
+  border: 2px solid #3498db;
+}
+
+.ee-tutorial-icon {
+  color: #3498db;
+  margin-bottom: 20px;
+}
+
+.ee-tutorial-content h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.ee-tutorial-text {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.ee-tutorial-text h3 {
+  color: #3498db;
+  margin-bottom: 10px;
+}
+
+.ee-tutorial-text ul {
+  list-style: none;
+  padding: 0;
+}
+
+.ee-tutorial-text li {
+  padding: 8px 0;
+  border-bottom: 1px solid #2c3e50;
+}
+
+.ee-start-button {
+  padding: 15px 30px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.ee-final-score {
+    font-size: 2.5rem;
+    color: #f1c40f;
+    margin: 20px 0;
+}
+
+.ee-game-over-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.ee-retry-button, .ee-menu-button {
+    padding: 15px 30px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.ee-retry-button {
+    background: #3498db;
+    color: white;
+}
+
+.ee-menu-button {
+    background: #95a5a6;
+    color: #2c3e50;
+}

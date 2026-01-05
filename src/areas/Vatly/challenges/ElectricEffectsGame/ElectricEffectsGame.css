@@ -1,0 +1,200 @@
+.electric-effects-game {
+  min-height: 100vh;
+  background: #2c3e50;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.eeff-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+.eeff-header h1 {
+  font-size: 2rem;
+  color: #f1c40f;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.eeff-back-button {
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.eeff-back-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.eeff-main-layout {
+  display: flex;
+  gap: 20px;
+  flex-grow: 1;
+}
+
+.eeff-station-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 220px;
+}
+
+.eeff-station-btn {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid transparent;
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.eeff-station-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #95a5a6;
+}
+
+.eeff-station-btn.active {
+  background: rgba(241, 196, 15, 0.3);
+  border-color: #f1c40f;
+  font-weight: bold;
+}
+
+.eeff-station-btn.completed {
+  background: rgba(46, 204, 113, 0.3);
+  border-color: #2ecc71;
+}
+
+.completion-check {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #2ecc71;
+}
+
+.eeff-canvas-container {
+  flex-grow: 1;
+  background: #1a2238;
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  border: 2px solid #34495e;
+}
+
+.eeff-canvas-container canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.eeff-instruction {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-style: italic;
+  color: #bdc3c7;
+}
+
+/* Tutorial & Game Over */
+.eeff-tutorial-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.eeff-tutorial-content {
+  background: #34495e;
+  padding: 40px;
+  border-radius: 15px;
+  max-width: 600px;
+  text-align: center;
+  border: 2px solid #f1c40f;
+}
+
+.eeff-tutorial-icon {
+  color: #f1c40f;
+  margin-bottom: 20px;
+}
+
+.eeff-tutorial-content h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.eeff-tutorial-text {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.eeff-tutorial-text h3 {
+  color: #f1c40f;
+  margin-bottom: 10px;
+}
+
+.eeff-tutorial-text ul {
+  list-style: none;
+  padding: 0;
+}
+
+.eeff-tutorial-text li {
+  padding: 8px 0;
+  border-bottom: 1px solid #2c3e50;
+}
+
+.eeff-start-button, .eeff-retry-button, .eeff-menu-button {
+  padding: 15px 30px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: bold;
+}
+
+.eeff-start-button {
+  background: #27ae60;
+  color: white;
+}
+
+.eeff-game-over-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.eeff-retry-button {
+    background: #3498db;
+    color: white;
+}
+
+.eeff-menu-button {
+    background: #95a5a6;
+    color: #2c3e50;
+}

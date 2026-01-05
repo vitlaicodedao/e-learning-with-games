@@ -1,0 +1,568 @@
+/* ColorMaster.css (PHIÊN BẢN SỬA LỖI LAYOUT HOÀN CHỈNH) */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap');
+
+:root {
+  --bg-dark: #1B2631;
+  --bg-medium: #2C3E50;
+  --bg-light-transparent: rgba(44, 62, 80, 0.85);
+  --text-light: #ECF0F1;
+  --text-dark: #1B2631;
+  
+  --accent-teal: #1ABC9C;
+  --accent-yellow: #F1C40F;
+  --accent-red: #E74C3C;
+  --accent-green: #2ECC71;
+  --accent-blue: #3498DB;
+  
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+
+  --transition-fast: 0.2s ease-out;
+  --transition-medium: 0.3s ease-in-out;
+  --shadow-small: 0 2px 5px rgba(0,0,0,0.3);
+  --shadow-large: 0 8px 25px rgba(0,0,0,0.5);
+  
+  --glow-teal: 0 0 12px 0px var(--accent-teal);
+  --glow-yellow: 0 0 12px 0px var(--accent-yellow);
+  --glow-red: 0 0 15px 0px var(--accent-red);
+  --glow-green: 0 0 15px 0px var(--accent-green);
+  --glow-blue: 0 0 15px 0px var(--accent-blue);
+  --glow-white: 0 0 15px 0px var(--color-white);
+}
+
+/* --- Keyframes cho Animation --- */
+@keyframes pulse-light {
+  0% { opacity: 0.7; filter: blur(2px); }
+  50% { opacity: 1; filter: blur(0px); }
+  100% { opacity: 0.7; filter: blur(2px); }
+}
+@keyframes shimmer-rainbow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+@keyframes pulse-dropzone {
+  0% { box-shadow: var(--glow-yellow); border-style: dashed; }
+  50% { box-shadow: 0 0 20px 3px var(--accent-yellow); border-style: solid; }
+  100% { box-shadow: var(--glow-yellow); border-style: dashed; }
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-out {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(20px); }
+}
+
+
+/* --- CÀI ĐẶT CHUNG (SỬA LỖI LAYOUT) --- */
+html, body {
+  height: 100%; /* Dùng 100% thay vì 100vh */
+  margin: 0;
+  padding: 0;
+}
+/* Giả định bạn dùng <div id="root">, nếu không hãy xóa #root */
+#root {
+  height: 100%;
+}
+body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* ĐÃ XÓA overflow: hidden - đây là nguyên nhân gây lỗi */
+}
+
+/* --- CẤU TRÚC LAYOUT CHÍNH (SỬA LỖI) --- */
+.color-master-game {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Dùng 100% */
+  width: 100%;
+  min-height: 100%; /* Đảm bảo lấp đầy */
+  box-sizing: border-box;
+}
+
+/* --- Header --- */
+.game-header {
+  padding: 15px 30px;
+  background-color: var(--bg-light-transparent);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--bg-medium);
+  position: relative; /* Header chiếm chiều cao tự nhiên */
+  z-index: 1000;
+  /* KHÔNG CẦN set height */
+}
+.game-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--accent-teal);
+  text-shadow: 0 0 8px var(--accent-teal);
+}
+.score-display {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.score-display span {
+  font-size: 1.5rem;
+  margin-left: 10px;
+  color: var(--accent-yellow);
+  font-weight: 700;
+  text-shadow: 0 0 5px var(--accent-yellow);
+}
+
+/* --- Main Content Area (SỬA LỖI) --- */
+.game-main {
+  display: flex;
+  flex-grow: 1; /* Tự động lấp đầy không gian còn lại */
+  min-height: 0; /* MẤU CHỐT: Cho phép co lại trên màn hình thấp */
+  /* ĐÃ XÓA height: calc(...) */
+}
+
+/* --- Toolbox (Bên trái) --- */
+.toolbox {
+  flex: 0 0 220px;
+  background-color: var(--bg-dark);
+  padding: 20px;
+  border-right: 1px solid var(--bg-medium);
+  overflow-y: auto;
+  transition: all var(--transition-medium);
+}
+.toolbox h3 {
+  margin-top: 0;
+  color: var(--accent-yellow);
+  border-bottom: 1px dashed var(--accent-yellow);
+  padding-bottom: 10px;
+  text-shadow: 0 0 5px var(--accent-yellow);
+}
+.tool-item {
+  padding: 12px 15px;
+  background-color: var(--bg-medium);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  cursor: grab;
+  font-weight: 500;
+  border: 2px solid transparent;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-small);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.tool-item-icon {
+  font-size: 1.5rem;
+  display: inline-block;
+  line-height: 1;
+}
+.tool-item:hover {
+  background-color: #34495E;
+  border-color: var(--accent-teal);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.4);
+}
+.tool-item:active {
+  cursor: grabbing;
+  transform: scale(0.98);
+  background-color: var(--accent-teal);
+  color: var(--text-dark);
+}
+.tool-item.is-used {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: var(--bg-dark);
+}
+
+/* --- Workbench (Bàn thí nghiệm) --- */
+.workbench {
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-medium);
+  background-image:
+    radial-gradient(circle at center, transparent 60%, var(--bg-dark) 95%),
+    linear-gradient(rgba(236, 240, 241, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(236, 240, 241, 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 25px 25px, 25px 25px;
+}
+
+/* Vật thể có thể kéo (trên bàn) */
+.draggable-item {
+  position: absolute;
+  min-width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 10px;
+  box-sizing: border-box;
+  cursor: grab;
+  background-color: rgba(236, 240, 241, 0.9);
+  color: var(--text-dark);
+  font-weight: bold;
+  box-shadow: var(--shadow-large);
+  border: 2px solid var(--text-light);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
+  z-index: 10;
+}
+.draggable-item .tool-item-icon {
+  font-size: 2.5rem;
+}
+.draggable-item.is-dragging {
+  cursor: grabbing;
+  transform: scale(1.1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  z-index: 100;
+  opacity: 0.9;
+}
+/* Style riêng cho các vật thể */
+.draggable-item.prism {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 60px 100px 60px;
+  border-color: transparent transparent rgba(178, 235, 242, 0.7) transparent;
+  background-color: transparent;
+  color: transparent;
+  box-shadow: none;
+  filter: drop-shadow(0 0 10px var(--accent-blue));
+  transition: filter var(--transition-medium);
+}
+.draggable-item.prism:hover,
+.draggable-item.prism.is-dragging {
+  filter: drop-shadow(0 0 20px var(--accent-blue));
+}
+.draggable-item.screen {
+  width: 150px;
+  height: 120px;
+  background-color: var(--color-white);
+  border: 3px solid #7f8c8d;
+  box-shadow: var(--shadow-large), inset 0 0 10px rgba(0,0,0,0.2);
+}
+.draggable-item.filter-item {
+  width: 50px;
+  height: 120px;
+  opacity: 0.8;
+  border: 2px solid var(--text-light);
+  justify-content: flex-start;
+}
+.filter-item[data-color="#FF0000"] { background-color: var(--accent-red); }
+.filter-item[data-color="#00FF00"] { background-color: var(--accent-green); }
+.filter-item[data-color="#0000FF"] { background-color: var(--accent-blue); }
+
+/* Vùng đích để kéo (chung) */
+.target-zone {
+  position: absolute;
+  border: 3px dashed var(--text-light);
+  opacity: 0.5;
+  transition: all var(--transition-fast);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.target-zone.is-over {
+  opacity: 1;
+  transform: scale(1.05);
+  background-color: rgba(236, 240, 241, 0.1);
+  border-color: var(--accent-yellow);
+  animation: pulse-dropzone 1.5s infinite;
+}
+.target-zone.is-filled {
+  opacity: 0.8;
+  border-color: var(--accent-green);
+  border-style: solid;
+  background-color: rgba(46, 204, 113, 0.2);
+  box-shadow: var(--glow-green);
+}
+
+/* --- Task Board (Bên phải) (SỬA LỖI) --- */
+.task-board {
+  flex: 0 0 280px;
+  background-color: var(--bg-dark);
+  padding: 20px;
+  border-left: 1px solid var(--bg-medium);
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* MẤU CHỐT: Cho phép co lại */
+}
+/* SỬA LỖI: Cho phép nội dung task cuộn */
+.task-content {
+  flex-grow: 1;
+  min-height: 0; /* MẤU CHỐT: Cho phép co lại */
+  overflow-y: auto; /* MẤU CHỐT: Thêm thanh cuộn NỘI BỘ */
+}
+.task-board h3 {
+  margin-top: 0;
+  color: var(--accent-teal);
+  text-shadow: 0 0 5px var(--accent-teal);
+}
+.task-board p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+/* SỬA LỖI: Nút bấm luôn ở dưới cùng */
+.task-buttons {
+  margin-top: auto; /* Luôn đẩy xuống dưới */
+  padding-top: 20px;
+  border-top: 1px solid var(--bg-medium);
+  flex-shrink: 0; /* Không cho phép co lại */
+}
+.game-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transform: perspective(1px) translateZ(0);
+  transition: all var(--transition-fast);
+}
+.game-button:hover:not(:disabled) {
+  transform: scale(1.03);
+  filter: brightness(1.15);
+}
+.game-button:active:not(:disabled) {
+  transform: scale(0.99);
+}
+.hint-button {
+  background-color: var(--accent-yellow);
+  color: var(--text-dark);
+  box-shadow: 0 0 10px -2px var(--accent-yellow);
+}
+.hint-button:hover:not(:disabled) {
+  box-shadow: var(--glow-yellow);
+}
+.next-button {
+  background-color: var(--accent-teal);
+  color: var(--text-dark);
+  box-shadow: 0 0 10px -2px var(--accent-teal);
+}
+.next-button:hover:not(:disabled) {
+  box-shadow: var(--glow-teal);
+}
+.next-button:disabled {
+  background-color: #7f8c8d;
+  color: #bdc3c7;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.start-button {
+  background-color: var(--accent-green);
+  color: var(--text-dark);
+  box-shadow: 0 0 15px var(--accent-green);
+}
+
+/* --- HIỆU ỨNG THÍ NGHIỆM --- (Không thay đổi) */
+.static-item {
+  position: absolute;
+  padding: 10px;
+  background-color: #4A6572;
+  border-radius: 5px;
+  color: var(--text-light);
+  z-index: 5;
+}
+.light-beam {
+  position: absolute;
+  height: 10px;
+  background: linear-gradient(to right, var(--color-white), rgba(255,255,255,0));
+  transform-origin: left center;
+  box-shadow: var(--glow-white);
+  animation: pulse-light 2s infinite ease-in-out;
+  transition: width var(--transition-medium);
+  z-index: 1;
+}
+.rainbow-beam {
+  position: absolute;
+  height: 100px;
+  background: linear-gradient(100deg, 
+    rgba(255,0,0,0.7), rgba(255,165,0,0.7), rgba(255,255,0,0.7), 
+    rgba(0,128,0,0.7), rgba(0,0,255,0.7), rgba(75,0,130,0.7), rgba(238,130,238,0.7)
+  );
+  background-size: 200% 200%;
+  transform-origin: left center;
+  clip-path: polygon(0% 20%, 100% 0%, 100% 100%, 0% 80%);
+  animation: shimmer-rainbow 5s linear infinite, fade-in 0.5s;
+  filter: drop-shadow(0 0 10px var(--color-white));
+  z-index: 1;
+}
+.color-light-circle {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  transition: all var(--transition-medium);
+  filter: blur(20px);
+  opacity: 0;
+  z-index: 1;
+}
+.color-light-circle.is-active {
+  opacity: 1;
+  filter: blur(10px);
+}
+.light-red {
+  background-color: var(--accent-red);
+  box-shadow: 0 0 80px 30px var(--accent-red);
+}
+.light-green {
+  background-color: var(--accent-green);
+  box-shadow: 0 0 80px 30px var(--accent-green);
+}
+.light-blue {
+  background-color: var(--accent-blue);
+  box-shadow: 0 0 80px 30px var(--accent-blue);
+}
+.m2-light-pos-red { left: 50%; top: 30%; }
+.m2-light-pos-green { left: 38%; top: 65%; }
+.m2-light-pos-blue { left: 62%; top: 65%; }
+.m3-screen {
+  position: absolute;
+  width: 150px;
+  height: 120px;
+  border: 3px solid #7f8c8d;
+  transition: background-color 0.3s;
+  background-color: #111;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.m4-stage {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border: 3px dashed var(--bg-medium);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all var(--transition-medium);
+  background-color: rgba(0,0,0,0.1);
+}
+.m4-stage.is-over {
+  border-color: var(--accent-yellow);
+  background-color: rgba(241, 196, 15, 0.1);
+  box-shadow: var(--glow-yellow);
+}
+.m4-stage.is-filled {
+  border-color: var(--accent-teal);
+  border-style: solid;
+}
+.m4-stage .draggable-item {
+  position: static;
+  transition: background-color 0.5s, border-color 0.5s;
+  width: 150px;
+  height: 150px;
+}
+.m4-light-controls {
+  padding: 10px;
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.light-button {
+  padding: 8px 12px;
+  margin: 0;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--text-light);
+  background-color: var(--bg-medium);
+}
+.light-button:hover:not(.active) {
+  background-color: #34495E;
+  border-color: var(--text-light);
+}
+.light-button.active[data-color="red"] {
+  background-color: var(--accent-red); box-shadow: var(--glow-red); color: var(--text-dark);
+}
+.light-button.active[data-color="green"] {
+  background-color: var(--accent-green); box-shadow: var(--glow-green); color: var(--text-dark);
+}
+.light-button.active[data-color="blue"] {
+  background-color: var(--accent-blue); box-shadow: var(--glow-blue); color: var(--text-dark);
+}
+.light-button.active[data-color="white"] {
+  background-color: var(--color-white); box-shadow: var(--glow-white); color: var(--text-dark);
+}
+
+/* --- MODAL & TOAST --- (Không thay đổi) */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fade-in 0.3s;
+}
+.modal-content {
+  background-color: var(--bg-medium);
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: var(--shadow-large);
+  border: 1px solid var(--accent-teal);
+}
+.modal-content h3 {
+  margin-top: 0;
+  color: var(--accent-yellow);
+}
+.modal-content button {
+  width: auto;
+  padding: 10px 20px;
+  margin-top: 20px;
+}
+.feedback-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 30px;
+  border-radius: 8px;
+  background-color: var(--accent-green);
+  color: var(--text-dark);
+  font-weight: 700;
+  box-shadow: var(--glow-green);
+  z-index: 3000;
+  animation: fade-in 0.3s;
+}
+.feedback-toast.is-fading-out {
+  animation: fade-out 0.3s forwards;
+}
+
+/* SỬA LỖI M4: Hiệu ứng "ghost" khi kéo vật thể */
+.react-draggable-dragging .tool-item {
+  opacity: 0.8;
+  transform: scale(1.1); /* To hơn 1 chút */
+  background-color: var(--accent-teal);
+  color: var(--text-dark);
+}
+
+/* SỬA LỖI M4: Làm mờ vật thể GỐC khi đang kéo */
+.tool-item.is-dragging-source {
+  opacity: 0.3;
+}

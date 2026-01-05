@@ -1,0 +1,368 @@
+/* WaterLab.css */
+
+/* --- Biến Màu Chủ Đạo --- */
+:root {
+  --bg-color: #F5F7FA;
+  --primary-color: #007AFF; /* Xanh công nghệ */
+  --water-color: #40A9FF;
+  --ice-color: #40E0D0;      /* Xanh băng */
+  --heat-color: #FF6B35;     /* Cam cháy */
+  --cold-color: #40E0D0;     /* Xanh băng */
+  --text-color: #333333;
+  --border-color: #D9D9D9;
+  --beaker-glass: rgba(255, 255, 255, 0.6);
+}
+
+/* --- Tổng Thể --- */
+.water-lab-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 24px;
+  background: var(--bg-color);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* --- Header --- */
+.lab-header {
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 16px;
+}
+.lab-header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+.lab-header .goal-text {
+  font-size: 1.1rem;
+  margin: 8px 0 0;
+  color: #555;
+}
+.stats {
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* --- Khu Vực Thí Nghiệm Chính --- */
+.lab-main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 400px;
+}
+.beaker-area {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+/* --- Cốc Thí Nghiệm --- */
+.beaker {
+  width: 200px;
+  height: 300px;
+  background: var(--beaker-glass);
+  border: 4px solid #B0C4DE;
+  border-top: none;
+  border-radius: 0 0 20px 20px;
+  position: relative;
+  overflow: hidden; /* Quan trọng để chứa chất lỏng */
+  box-shadow: inset 0 -5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Nắp đậy */
+.lid {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: calc(100% + 20px);
+  height: 25px;
+  background: #B0C4DE;
+  border-radius: 10px 10px 0 0;
+  border: 4px solid #778899;
+  z-index: 10;
+}
+.condensed-drops {
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--water-color);
+  padding-top: 2px;
+}
+
+/* Vạch chia */
+.beaker-marks {
+  position: absolute;
+  right: 5px;
+  bottom: 0;
+  height: 100%;
+  width: 30px;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-around;
+  padding-bottom: 10%; /* Căn chỉnh vạch 50ml */
+  box-sizing: border-box;
+}
+.beaker-marks span {
+  font-size: 0.8rem;
+  color: #778899;
+  position: relative;
+}
+.beaker-marks span::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  width: 15px;
+  height: 2px;
+  background: #778899;
+}
+
+/* --- Chất bên trong --- */
+.substance {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  transition: height 0.1s linear, background 0.3s;
+}
+.substance.solid {
+  background: var(--ice-color);
+}
+.substance.liquid {
+  background: var(--water-color);
+}
+.substance.melting {
+  /* Hiệu ứng tan chảy */
+  background: linear-gradient(180deg, var(--water-color) 0%, var(--ice-color) 100%);
+}
+.substance.freezing {
+  /* Hiệu ứng đóng băng */
+  background: linear-gradient(180deg, var(--ice-color) 0%, var(--water-color) 100%);
+}
+.substance.boiling {
+  background: var(--water-color);
+}
+
+/* --- Hiệu ứng Sôi (Bubbles) --- */
+.bubbles {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+.bubbles span {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  animation: bubble-rise 2s infinite ease-in;
+}
+/* Phân bổ và thời gian ngẫu nhiên cho bọt khí */
+.bubbles span:nth-child(1) { left: 20%; animation-duration: 1.5s; animation-delay: 0.5s; }
+.bubbles span:nth-child(2) { left: 40%; animation-duration: 2s; animation-delay: 0.1s; }
+.bubbles span:nth-child(3) { left: 60%; animation-duration: 1.8s; animation-delay: 0.8s; }
+.bubbles span:nth-child(4) { left: 80%; animation-duration: 2.2s; animation-delay: 0.3s; }
+
+@keyframes bubble-rise {
+  0% { bottom: 0; opacity: 1; transform: scale(0.5); }
+  100% { bottom: 100%; opacity: 0; transform: scale(1); }
+}
+
+/* Hiệu ứng Hơi Nước (Steam) */
+.steam {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  width: 100%;
+  height: 30px;
+}
+.steam span {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: steam-rise 3s infinite ease-out;
+}
+.steam span:nth-child(1) { left: 30%; animation-delay: 0.5s; }
+.steam span:nth-child(2) { left: 50%; animation-delay: 0s; }
+.steam span:nth-child(3) { left: 70%; animation-delay: 1s; }
+
+@keyframes steam-rise {
+  0% { transform: translateY(0) scale(0.5); opacity: 0; }
+  20% { opacity: 0.7; }
+  100% { transform: translateY(-40px) scale(1.5); opacity: 0; }
+}
+
+
+/* --- Nhiệt Kế --- */
+.thermometer {
+  width: 30px;
+  height: 320px;
+  background: var(--beaker-glass);
+  border: 3px solid #B0C4DE;
+  border-radius: 20px;
+  position: relative;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.thermo-level {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  background: linear-gradient(0deg, var(--cold-color) 0%, var(--heat-color) 100%);
+  border-radius: 10px;
+  transition: height 0.1s linear;
+}
+.thermo-reading {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 600;
+  font-size: 1rem;
+  background: white;
+  padding: 2px 5px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* --- Bảng Điều Khiển --- */
+.lab-controls {
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.slider-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 80%;
+}
+.slider-icon {
+  font-size: 1.5rem;
+}
+.slider-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #555;
+}
+
+/* --- Thanh Trượt Hiện Đại --- */
+.temperature-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 10px;
+  outline: none;
+  opacity: 0.9;
+  transition: opacity .2s;
+  cursor: pointer;
+}
+.temperature-slider:hover {
+  opacity: 1;
+}
+.temperature-slider:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Con trỏ (Thumb) */
+.temperature-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.temperature-slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* --- Modal Kết Quả --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+}
+.modal-content h2 {
+  color: var(--primary-color);
+  margin-top: 0;
+}
+.modal-content h3 {
+  font-size: 1.5rem;
+}
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+.modal-buttons button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.modal-buttons button:first-child {
+  background: #eee;
+  color: #555;
+}
+.modal-buttons button:first-child:hover {
+  background: #ddd;
+}
+.modal-buttons button:last-child {
+  background: var(--primary-color);
+  color: white;
+}
+.modal-buttons button:last-child:hover {
+  opacity: 0.8;
+}

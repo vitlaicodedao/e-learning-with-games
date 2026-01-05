@@ -1,0 +1,249 @@
+/* --- Cài đặt chung --- */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Bắt đầu từ trên cùng */
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #87CEEB 0%, #E0F2F1 100%); /* Bầu trời -> Sáng */
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+  color: #333;
+}
+
+.header-bar {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #004D40; /* Xanh đậm */
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #004D40;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+}
+
+.hint-text {
+  color: #004D40;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+/* --- Khu vực chơi game (Quan trọng) --- */
+.game-area {
+  position: relative;
+  width: 100%;
+  max-width: 900px; /* Tăng chiều rộng */
+  height: 400px; /* Tăng chiều cao */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 20px; /* Thêm khoảng cách cho các nút */
+}
+
+/* --- Đòn bẩy và Điểm tựa --- */
+.fulcrum {
+  position: absolute;
+  bottom: 100px; /* Đẩy điểm tựa lên */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px; /* To hơn */
+  height: 70px; /* Cao hơn */
+  background-color: #D2691E; /* Màu nâu đất */
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  z-index: 10;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.lever-container {
+  position: absolute;
+  bottom: 170px; /* Đặt đòn bẩy NẰM TRÊN điểm tựa (100px + 70px) */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px; /* Rộng hơn */
+  height: 20px; /* Dày hơn */
+  transform-origin: center; /* Trục quay nằm ở giữa */
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Hiệu ứng nảy */
+  z-index: 5;
+  
+  /* Đòn bẩy thật */
+  background-color: #8B4513; /* Nâu gỗ sậm */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- Khe/Vị trí thả vật (Drop Slot) --- */
+.drop-slot {
+  position: absolute;
+  width: 48px; /* Rộng hơn vật nặng */
+  height: 48px; /* Cao hơn vật nặng */
+  /* background: rgba(0, 255, 0, 0.1); */ /* Dùng để debug */
+  border: 2px dashed rgba(255, 255, 255, 0); /* Ẩn ban đầu */
+  border-radius: 8px;
+  z-index: 15;
+  
+  /* Định vị chính xác dựa trên tâm */
+  top: 50%;
+  transform: translate(-50%, -50%);
+  
+  /* Hiệu ứng khi kéo vật qua */
+  transition: all 0.2s ease;
+}
+
+.drop-slot.drag-over {
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px dashed #ffffff;
+  transform: translate(-50%, -50%) scale(1.1); /* Phóng to */
+}
+
+/* Vạch chia */
+.mark {
+  position: absolute;
+  width: 2px;
+  height: 10px; /* Vạch ngắn */
+  background-color: rgba(0, 0, 0, 0.4);
+  top: -15px; /* Nằm trên đòn bẩy */
+  transform: translateX(-50%);
+}
+.mark.main-mark {
+  height: 20px; /* Vạch dài hơn */
+  top: -25px;
+}
+
+
+/* --- Vật nặng (Mass) --- */
+.mass-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 900px;
+  box-sizing: border-box;
+}
+
+.mass {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(145deg, #F44336, #B71C1C); /* Màu đỏ 3D */
+  border: 1px solid #FFCDD2;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: white;
+  cursor: grab;
+  z-index: 20;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  user-select: none; /* Chống bôi đen text */
+}
+
+.mass:active, .mass.dragging {
+  cursor: grabbing;
+  transform: scale(1.1);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+}
+
+/* Vật nặng đã đặt trên đòn bẩy */
+.placed-mass {
+  position: absolute;
+  bottom: 20px; /* Nằm trên đòn bẩy (20px là chiều cao đòn bẩy) */
+  left: 50%; /* Sẽ bị ghi đè bởi style */
+  transform: translateX(-50%);
+  /* Thêm để người dùng có thể nhấp để xóa */
+  cursor: pointer;
+  transition: left 0.3s ease;
+}
+
+.placed-mass.hidden {
+  background: linear-gradient(145deg, #757575, #424242); /* Màu xám */
+  border-color: #BDBDBD;
+  font-size: 1.5rem;
+}
+
+/* --- Nút và Phản hồi --- */
+.controls {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.button {
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background: #4CAF50; /* Xanh lá */
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+.button:hover:not(:disabled) {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+.button:disabled {
+  background: #BDBDBD;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Nút Tiếp Theo */
+.button.next {
+  background: #2196F3; /* Xanh dương */
+}
+.button.next:hover {
+  background: #1E88E5;
+}
+
+/* Phản hồi (Mặt cười/mếu) */
+.feedback-face {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background-color: #FFEB3B; /* Vàng */
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  z-index: 30;
+  box-shadow: 0 0 30px 10px rgba(255, 235, 59, 0.7);
+  animation: pop-in 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+@keyframes pop-in {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+

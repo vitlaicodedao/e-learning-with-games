@@ -1,0 +1,357 @@
+.pressure-master {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: white;
+  padding: 20px;
+  position: relative;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 10;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(-5px);
+}
+
+.game-header {
+  text-align: center;
+  margin-bottom: 25px;
+  padding-top: 20px;
+}
+
+.game-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+.game-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.level-badge,
+.score-badge,
+.time-badge {
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.level-badge {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+}
+
+.score-badge {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.time-badge {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.menu-screen,
+.playing-screen,
+.victory-screen {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.intro-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 35px;
+  backdrop-filter: blur(10px);
+}
+
+.intro-card h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #60a5fa;
+}
+
+.level-desc {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.formulas {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.formulas h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #60a5fa;
+}
+
+.formulas ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.formulas li {
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  line-height: 1.5;
+}
+
+.formulas strong {
+  color: #fbbf24;
+}
+
+.start-button {
+  width: 100%;
+  padding: 18px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s;
+}
+
+.start-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+}
+
+.controls-panel {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.controls-panel h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #60a5fa;
+}
+
+.weight-controls,
+.liquid-controls,
+.altitude-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.weight-controls button,
+.liquid-controls button,
+.altitude-controls button {
+  padding: 10px 20px;
+  background: rgba(59, 130, 246, 0.2);
+  border: 1px solid #3b82f6;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.weight-controls button:hover,
+.liquid-controls button:hover,
+.altitude-controls button:hover {
+  background: rgba(59, 130, 246, 0.3);
+  transform: translateY(-2px);
+}
+
+.liquid-slider {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+.liquid-slider input[type="range"] {
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.liquid-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #3b82f6;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.liquid-slider span {
+  font-weight: bold;
+  min-width: 50px;
+  text-align: right;
+}
+
+.game-canvas {
+  display: block;
+  margin: 0 auto;
+  border-radius: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  background: #1e293b;
+}
+
+.victory-screen {
+  text-align: center;
+  padding: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.trophy-icon {
+  color: #fbbf24;
+  margin-bottom: 20px;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.victory-screen h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #10b981;
+}
+
+.victory-screen p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 30px;
+}
+
+.victory-stats {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  padding: 10px 0;
+}
+
+.stat-item strong {
+  color: #60a5fa;
+}
+
+.stat-item span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fbbf24;
+}
+
+.victory-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.victory-actions button {
+  padding: 15px 35px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.victory-actions button:first-child {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+}
+
+.victory-actions button:last-child {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.victory-actions button:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 900px) {
+  .game-canvas {
+    width: 100%;
+    height: auto;
+  }
+
+  .intro-card {
+    padding: 25px;
+  }
+
+  .controls-panel {
+    padding: 15px;
+  }
+
+  .victory-actions {
+    flex-direction: column;
+  }
+
+  .victory-actions button {
+    width: 100%;
+  }
+}

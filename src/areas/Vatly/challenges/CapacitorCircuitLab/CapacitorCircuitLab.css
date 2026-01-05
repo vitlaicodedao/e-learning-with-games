@@ -1,0 +1,57 @@
+.capacitor-container { width: 100%; height: 100vh; background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); overflow: hidden; font-family: 'Arial', sans-serif; }
+.capacitor-menu { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 2rem; }
+.capacitor-menu-content { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 20px; padding: 3rem; max-width: 800px; width: 100%; border: 1px solid rgba(255, 255, 255, 0.1); }
+.capacitor-title { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+.capacitor-title-icon { width: 48px; height: 48px; color: #60a5fa; }
+.capacitor-title h1 { font-size: 2.5rem; font-weight: bold; color: #fff; margin: 0; }
+.capacitor-description { text-align: center; color: #cbd5e1; font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; }
+.capacitor-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 2rem 0; }
+.stat-item { display: flex; align-items: center; gap: 1rem; background: rgba(96, 165, 250, 0.1); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(96, 165, 250, 0.2); }
+.stat-icon { width: 32px; height: 32px; color: #60a5fa; }
+.stat-value { font-size: 2rem; font-weight: bold; color: #fff; }
+.stat-label { font-size: 0.9rem; color: #94a3b8; }
+.capacitor-menu-buttons { display: flex; gap: 1rem; margin-top: 2rem; }
+.capacitor-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 2rem; font-size: 1.1rem; font-weight: 600; border: none; border-radius: 12px; cursor: pointer; transition: all 0.3s; }
+.capacitor-btn-primary { background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%); color: white; }
+.capacitor-btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(96, 165, 250, 0.4); }
+.capacitor-btn-secondary { background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%); color: white; }
+.capacitor-btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(167, 139, 250, 0.4); }
+.capacitor-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.result-score { text-align: center; margin: 3rem 0; }
+.result-value { font-size: 4rem; font-weight: bold; color: #60a5fa; text-shadow: 0 0 20px rgba(96, 165, 250, 0.5); }
+.result-label { font-size: 1.2rem; color: #cbd5e1; margin-top: 0.5rem; }
+.capacitor-game { display: flex; flex-direction: column; height: 100vh; }
+.capacitor-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: rgba(0, 0, 0, 0.3); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.capacitor-header-left, .capacitor-header-right { display: flex; align-items: center; gap: 1rem; }
+.capacitor-header h2 { color: #fff; margin: 0; font-size: 1.5rem; }
+.capacitor-icon-btn { background: rgba(96, 165, 250, 0.2); border: 1px solid rgba(96, 165, 250, 0.3); color: #60a5fa; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; }
+.capacitor-icon-btn:hover { background: rgba(96, 165, 250, 0.3); transform: scale(1.05); }
+.capacitor-score { color: #fff; font-size: 1.1rem; font-weight: 600; background: rgba(167, 139, 250, 0.2); padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid rgba(167, 139, 250, 0.3); }
+.capacitor-content { display: flex; flex: 1; overflow: hidden; }
+.capacitor-canvas-container { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+.capacitor-canvas { border-radius: 12px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); border: 2px solid rgba(96, 165, 250, 0.3); }
+.capacitor-controls { width: 400px; background: rgba(0, 0, 0, 0.3); border-left: 1px solid rgba(255, 255, 255, 0.1); padding: 2rem; overflow-y: auto; }
+.control-section { margin-bottom: 2rem; background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); }
+.control-section h3 { color: #fff; margin: 0 0 1rem 0; font-size: 1.2rem; border-bottom: 2px solid rgba(96, 165, 250, 0.3); padding-bottom: 0.5rem; }
+.mode-buttons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+.mode-btn { padding: 0.75rem; background: rgba(96, 165, 250, 0.1); border: 1px solid rgba(96, 165, 250, 0.3); color: #60a5fa; border-radius: 8px; cursor: pointer; transition: all 0.3s; font-size: 0.9rem; font-weight: 600; }
+.mode-btn:hover { background: rgba(96, 165, 250, 0.2); }
+.mode-btn.active { background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%); color: white; box-shadow: 0 4px 15px rgba(96, 165, 250, 0.4); }
+.control-group { margin-bottom: 1.5rem; }
+.control-group label { display: block; color: #cbd5e1; font-size: 0.95rem; margin-bottom: 0.5rem; font-weight: 500; }
+.control-group input[type="range"] { width: 100%; height: 6px; border-radius: 3px; background: rgba(96, 165, 250, 0.2); outline: none; margin-top: 0.5rem; }
+.control-group input[type="range"]::-webkit-slider-thumb { appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #60a5fa; cursor: pointer; transition: all 0.3s; }
+.control-group input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); box-shadow: 0 0 10px rgba(96, 165, 250, 0.8); }
+.capacitor-info-box { background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 8px; border-left: 3px solid #60a5fa; }
+.capacitor-info-box p { color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; margin: 0.5rem 0; }
+.capacitor-info-box strong { color: #60a5fa; }
+.challenge-section { background: rgba(167, 139, 250, 0.1); border: 1px solid rgba(167, 139, 250, 0.3); }
+.challenge-question { color: #fff; font-size: 1rem; line-height: 1.5; margin-bottom: 1rem; background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 8px; }
+.challenge-input-group { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.challenge-input { flex: 1; padding: 0.75rem; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; color: #fff; font-size: 1rem; }
+.challenge-input:focus { outline: none; border-color: #60a5fa; background: rgba(255, 255, 255, 0.15); }
+.challenge-unit { display: flex; align-items: center; padding: 0.75rem; background: rgba(96, 165, 250, 0.2); border: 1px solid rgba(96, 165, 250, 0.3); border-radius: 8px; color: #60a5fa; font-weight: 600; }
+.capacitor-controls::-webkit-scrollbar { width: 8px; }
+.capacitor-controls::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+.capacitor-controls::-webkit-scrollbar-thumb { background: rgba(96, 165, 250, 0.5); border-radius: 4px; }
+.capacitor-controls::-webkit-scrollbar-thumb:hover { background: rgba(96, 165, 250, 0.7); }
