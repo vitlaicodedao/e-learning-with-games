@@ -97,17 +97,21 @@ const GameJourney = () => {
     navigate(game.path);
   };
 
-  // Xử lý đánh dấu hoàn thành (manual)
+  // Xử lý đánh dấu hoàn thành (manual) - chỉ dùng cho debug/testing
   const handleCompleteGame = async (e, game) => {
     e.stopPropagation();
     
-    await completeGame({
+    const result = await completeGame({
       gameId: game.id,
       grade: selectedGrade,
       chapter: game.chapter,
-      score: 100,
+      score: 100, // Manual complete luôn cho 100 điểm
       maxScore: 100
     });
+
+    if (result && !result.passed) {
+      alert(result.message);
+    }
   };
 
   // Xử lý reset tiến độ

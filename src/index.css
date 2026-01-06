@@ -2,7 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-
+/* CSS Variables - Default Theme (Light) */
+:root {
+  --bg: #ffffff;
+  --text: #1f2937;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --input-bg: #ffffff;
+  --input-text: #1f2937;
+  --input-border: #d1d5db;
+  --input-placeholder: #9ca3af;
+}
 
 /* Apply globally */
 html, body, #root {
@@ -22,6 +32,15 @@ html, body, #root {
 @layer base {
   body {
     @apply font-sans;
+  }
+  
+  /* Ensure inputs have visible text by default */
+  input, textarea, select {
+    color: #1f2937;
+  }
+  
+  input::placeholder, textarea::placeholder {
+    color: #9ca3af;
   }
 }
 
@@ -54,9 +73,9 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Global transition */
+/* Global transition - exclude color to prevent input text issues */
 * {
-  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }

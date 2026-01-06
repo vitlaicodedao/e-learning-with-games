@@ -55,7 +55,7 @@ export const useGameCompletion = ({
     return Math.floor((Date.now() - startTimeRef.current) / 1000);
   }, []);
 
-  // Complete game với điểm số
+  // Complete game với điểm số - chỉ mark complete khi đạt >= 80%
   const handleComplete = useCallback(async ({ 
     score = 100, 
     maxScore = 100, 
@@ -80,7 +80,11 @@ export const useGameCompletion = ({
       });
 
       setGameResult(result);
-      setIsCompleted(true);
+      
+      // Chỉ đánh dấu hoàn thành khi đạt >= 80% điểm
+      if (result?.passed) {
+        setIsCompleted(true);
+      }
       
       if (showModal) {
         setShowCompletionModal(true);

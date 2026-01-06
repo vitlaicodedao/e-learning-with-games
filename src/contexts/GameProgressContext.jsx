@@ -35,6 +35,16 @@ export const GameProgressProvider = ({ children }) => {
           }
         }));
       }
+      
+      // Load game results từ localStorage
+      const localResultsKey = `physics-games-results-grade-${grade}`;
+      const localResults = localStorage.getItem(localResultsKey);
+      if (localResults) {
+        setGameResults(prev => ({
+          ...prev,
+          [grade]: JSON.parse(localResults)
+        }));
+      }
       return;
     }
 
@@ -74,29 +84,61 @@ export const GameProgressProvider = ({ children }) => {
     }
   }, [user]);
 
-  // Hoàn thành game
+  // Hoàn thành game - chỉ đánh dấu hoàn thành khi đạt >= 80% điểm
   const completeGame = useCallback(async ({ gameId, grade, chapter, score, maxScore, playTime, details }) => {
-    // Cập nhật local state ngay lập tức (optimistic update)
-    setProgressByGrade(prev => {
-      const gradeProgress = prev[grade] || { completed: [], current: null, totalTrophies: 0 };
-      const newCompleted = gradeProgress.completed.includes(gameId) 
-        ? gradeProgress.completed 
-        : [...gradeProgress.completed, gameId];
-      
-      const newProgress = {
-        ...gradeProgress,
-        completed: newCompleted,
-        totalTrophies: newCompleted.length
-      };
-      
-      // Cập nhật localStorage
-      localStorage.setItem(`physics-games-progress-grade-${grade}`, JSON.stringify(newProgress));
-      
-      return {
-        ...prev,
-        [grade]: newProgress
-      };
-    });
+    const actualScore = score || 0;
+    const actualMaxScore = maxScore || 100;
+    const scorePercent = (actualScore / actualMaxScore) * 100;
+    const isPassingScore = scorePercent >= 80;
+
+    // Chỉ đánh dấu hoàn thành nếu đạt >= 80%
+    if (isPassingScore) {
+      // Cập nhật local state ngay lập tức (optimistic update)
+      setProgressByGrade(prev => {
+        const gradeProgress = prev[grade] || { completed: [], current: null, totalTrophies: 0 };
+        const newCompleted = gradeProgress.completed.includes(gameId) 
+          ? gradeProgress.completed 
+          : [...gradeProgress.completed, gameId];
+        
+        const newProgress = {
+          ...gradeProgress,
+          completed: newCompleted,
+          totalTrophies: newCompleted.length
+        };
+        
+        // Cập nhật localStorage
+        localStorage.setItem(`physics-games-progress-grade-${grade}`, JSON.stringify(newProgress));
+        
+        return {
+          ...prev,
+          [grade]: newProgress
+        };
+      });
+    }
+
+    // Cập nhật game results (hiển thị điểm) bất kể có pass hay không
+    const gameResultData = {
+      score: actualScore,
+      maxScore: actualMaxScore,
+      stars: scorePercent >= 90 ? 3 : scorePercent >= 80 ? 2 : scorePercent >= 60 ? 1 : 0,
+      playTime: playTime || 0,
+      completedAt: new Date().toISOString(),
+      passed: isPassingScore
+    };
+
+    setGameResults(prev => ({
+      ...prev,
+      [grade]: {
+        ...prev[grade],
+        [gameId]: gameResultData
+      }
+    }));
+
+    // Lưu game results vào localStorage
+    const localResultsKey = `physics-games-results-grade-${grade}`;
+    const existingResults = JSON.parse(localStorage.getItem(localResultsKey) || '{}');
+    existingResults[gameId] = gameResultData;
+    localStorage.setItem(localResultsKey, JSON.stringify(existingResults));
 
     // Nếu user đã đăng nhập, lưu vào server
     if (user?.email) {
@@ -106,24 +148,29 @@ export const GameProgressProvider = ({ children }) => {
           gameId,
           grade,
           chapter,
-          score: score || 100,
-          maxScore: maxScore || 100,
+          score: actualScore,
+          maxScore: actualMaxScore,
           playTime: playTime || 0,
-          details: details || {}
+          details: details || {},
+          completed: isPassingScore // Server biết game có được đánh dấu hoàn thành không
         });
 
         if (response.data.success) {
           // Cập nhật với data từ server
-          setProgressByGrade(prev => ({
-            ...prev,
-            [grade]: {
-              ...prev[grade],
-              completed: response.data.completedGames
-            }
-          }));
+          if (isPassingScore) {
+            setProgressByGrade(prev => ({
+              ...prev,
+              [grade]: {
+                ...prev[grade],
+                completed: response.data.completedGames || prev[grade]?.completed
+              }
+            }));
+          }
           
           return {
             success: true,
+            passed: isPassingScore,
+            scorePercent,
             ...response.data.result
           };
         }
@@ -133,7 +180,15 @@ export const GameProgressProvider = ({ children }) => {
       }
     }
 
-    return { success: true, gameId };
+    return { 
+      success: true, 
+      gameId,
+      passed: isPassingScore,
+      scorePercent,
+      message: isPassingScore 
+        ? 'Chúc mừng! Bạn đã vượt qua thử thách!' 
+        : `Bạn cần đạt ít nhất 80% để hoàn thành. Điểm hiện tại: ${scorePercent.toFixed(0)}%`
+    };
   }, [user]);
 
   // Lưu kết quả game (không nhất thiết phải hoàn thành)
